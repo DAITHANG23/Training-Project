@@ -1,42 +1,38 @@
-import styled from "@emotion/styled"
+import { styled } from "@mui/material"
 
 
-export const CardCountry = styled('div')`
-width: 30%;
-height: 200px;
-border-radius: 8px;
-text-align: center;
-display: flex;
-flex-direction: column;
-align-items: center;
-justify-content: center;
-background-color: #ffff;
-gap: 20px;
-cursor: pointer;
-position: relative;
-transition: all 0.3s;
-":hover": {
-  transform: scale(1.1);
-}
-`
+export const CardCountry = styled('div')(({theme}) =>({
+  width: '30%',
+  height: '250px',
+  borderRadius: '8px',
+  textAlign: 'center',
+  backgroundColor: `${theme.palette.background.card}`,
+  cursor: 'pointer',
+  position: 'relative',
+  transition: 'all 0.3s'
+}))
+ 
 
-export const CardIsComing = styled('div')`
-    border: none;
-    background-color: rgb(48, 47, 47);
-    color: #ffff;
-    border-radius: 30px;
-    padding: 10px 20px;
-    z-index: 1;
-    position: absolute;
-    top: 70px;
-    left: 90px;
-    opacity: 1 !important;
-`
+export const CardIsComing = styled('div')(({theme}) =>({
+  border: 'none',
+  backgroundColor: `${theme.palette.background.iscoming}`,
+  color: `${theme.palette.text.card}`,
+  borderRadius: '30px',
+  padding: '10px 20px',
+  zIndex: '1',
+  position: 'absolute',
+  top: '100px',
+  left: '90px',
+  opacity: '1 !important',
+}))
+    
 
-export const Cards = styled('div')`
-display: flex;
-flex-wrap: wrap;
-gap: 30px;
-margin: 30px 0px;
-`
+export const Cards = styled('div')(({theme}) =>({
+  display: 'flex',
+  flexWrap: 'wrap',
+  gap: '50px',
+  margin: '30px 0px',
+}))
+  
+
 

@@ -1,5 +1,5 @@
-import styled from "@emotion/styled"
-
+import { styled } from "@mui/material"
+import Link from '@mui/material/Link';
 export const ImageContainer = styled('div')`
          width: 30%;
          margin-bottom: 10px;
@@ -11,3 +11,10 @@ export const ContainerContact = styled('div')`
         display: flex; 
         gap: 10px
     `
+
+export const LinkStyled = styled(Link)(({theme})=>({
+    color: `${theme.palette.primary.main}`, 
+    marginBottom: "25px", 
+    fontStyle: "italic", 
+    fontWeight: "600" 
+}))    

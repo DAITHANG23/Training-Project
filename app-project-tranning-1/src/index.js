@@ -4,10 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { QueryClient, QueryClientProvider } from 'react-query'
-import { ThemeProvider } from '@emotion/react'
-import { unstable_createMuiStrictModeTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@mui/material';
+import theme from './theme/theme';
 
-const theme = unstable_createMuiStrictModeTheme();
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const queryClient = new QueryClient();

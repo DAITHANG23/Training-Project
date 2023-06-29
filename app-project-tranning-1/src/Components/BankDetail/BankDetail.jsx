@@ -1,11 +1,11 @@
 import React from 'react'
 import PhoneIcon from '@mui/icons-material/Phone';
-import { useBankDetail } from '../../Hooks/useFetch';
+import { useBankDetail } from '../../hooks/useFetch';
 import { Typography } from '@mui/material';
-import Link from '@mui/material/Link';
-import { ImageContainer } from './BankDetial.styled';
-import { ContainerContact } from './BankDetial.styled';
-import { StyledImageBank } from './BankDetial.styled';
+import { LinkStyled } from './BankDetail.styled';
+import { ImageContainer } from './BankDetail.styled';
+import { ContainerContact } from './BankDetail.styled';
+import { StyledImageBank } from './BankDetail.styled';
 
 const BankDetail = (props) => {
     const { idBank } = props;
@@ -20,8 +20,10 @@ const BankDetail = (props) => {
                 <StyledImageBank  src={data?.data.logoUrl} alt={data?.data.name} />
             </ImageContainer>
             <ContainerContact  >
-                <PhoneIcon sx={{ color: "#5954E9" }} />
-                <Link sx={{ color: "#5954E9", marginBottom: "25px", fontStyle: "italic", fontWeight: "600" }} href={data?.data.hotline}>{data?.data.hotline}</Link>
+               {
+                data?.data.hotline && <PhoneIcon sx={{ color: "#5954E9"}} /> 
+               } 
+                <LinkStyled href={data?.data.hotline}>{data?.data.hotline}</LinkStyled>
             </ContainerContact>
 
         </div>
