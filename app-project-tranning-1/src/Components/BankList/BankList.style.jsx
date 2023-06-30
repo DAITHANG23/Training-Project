@@ -1,31 +1,31 @@
 import { styled, TableCell } from "@mui/material"
-import theme from "../../theme/theme"        
+       
     
-export const ActiveCard = styled('div')`
-    width: 125px;
-    text-align: center;
-    border: none;
-    border-radius: 8px;
-    padding: 12px 35px;
-    background-color: ${theme.palette.background.active};
-    color: ${theme.palette.text.card};
-    opacity: ${props => props.styleActive ? '1' : '0.7'};
-`
-  
+export const ActiveCard = styled('div')(props =>({
+  width: '125px',
+  textAlign: 'center',
+  border: 'none',
+  borderRadius: '8px',
+  padding: '12px 35px',
+  backgroundColor: `${props.theme.palette.background.active}`,
+  color: `${props.theme.palette.text.card}`,
+  opacity: `${props.styleActive ? '1' : '0.7'}`,
+}))
+    
 
-export const Inactive = styled('div')`
-    width: 125px;
-    text-align: center;
-    border:none;
-    border-radius: 8px;
-    padding: 12px 35px;
-    background-color: ${theme.palette.background.inactive};
-    color: ${theme.palette.text.card};
-    opacity: ${props => props.styleActive ? '1' : '0.7'};
-`
-  
-    
-  
+export const Inactive = styled('div')( props =>({
+  width: '125px',
+  textAlign: 'center',
+  border: 'none',
+  borderRadius: '8px',
+  padding: '12px 35px',
+  backgroundColor: `${props.theme.palette.background.inactive}`,
+  color: `${props.theme.palette.text.card}`,
+  opacity: `${props.styleActive ? '1' : '0.7'}`,
+
+}))
+   
+
 export const TableCellNameStyle = styled(TableCell)(({ theme }) => ({
   borderTopLeftRadius: '16px',
   borderBottomLeftRadius: '16px',
