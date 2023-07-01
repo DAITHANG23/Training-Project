@@ -1,27 +1,27 @@
 import { styled, TableCell } from "@mui/material"
        
     
-export const ActiveCard = styled('div')(props =>({
+export const ActiveCard = styled('div')(({theme, styleActive}) =>({
   width: '125px',
   textAlign: 'center',
   border: 'none',
   borderRadius: '8px',
   padding: '12px 35px',
-  backgroundColor: `${props.theme.palette.background.active}`,
-  color: `${props.theme.palette.text.card}`,
-  opacity: `${props.styleActive ? '1' : '0.7'}`,
+  backgroundColor: theme.palette.background.active,
+  color: theme.palette.text.card,
+  opacity: styleActive ? '1' : '0.7',
 }))
     
 
-export const Inactive = styled('div')( props =>({
+export const Inactive = styled('div')( ({theme, styleActive}) =>({
   width: '125px',
   textAlign: 'center',
   border: 'none',
   borderRadius: '8px',
   padding: '12px 35px',
-  backgroundColor: `${props.theme.palette.background.inactive}`,
-  color: `${props.theme.palette.text.card}`,
-  opacity: `${props.styleActive ? '1' : '0.7'}`,
+  backgroundColor: theme.palette.background.inactive,
+  color: theme.palette.text.card,
+  opacity: styleActive ? '1' : '0.7',
 
 }))
    

@@ -7,11 +7,12 @@ export const CardImage = styled('div')`
   margin-bottom: 10px
   
 `
-export const StyledImage = styled('img')`
-    width: ${props => props.isComing ? '70%' : '100%'};
-`
+export const StyledImage = styled('img')(({isComing}) =>({
+    width: isComing ? '70%' : '100%',
+}))
+    
 
-export const CountryContainer = styled('div')(props =>({
+export const CountryContainer = styled('div')(({status, isSelected, theme}) =>({
     height: '100%',
     width: '100%',
     textAlign: 'center',
@@ -19,8 +20,8 @@ export const CountryContainer = styled('div')(props =>({
     justifyContent: 'center',
     flexDirection: 'column',
     alignItems: 'center',
-    opacity:`${props.status ? '0.4' : '1'}`,
-    border:`${props.isSelected ? `${props.theme.palette.primary.main} 2px solid` : `${props.theme.palette.secondary.main} 2px solid`}`,
+    opacity: status ? '0.4' : '1',
+    border: isSelected ? `${theme.palette.primary.main} 2px solid` : `${theme.palette.secondary.main} 2px solid`,
     borderRadius: '8px',
 }))
     
@@ -38,8 +39,8 @@ export const CardCheck = styled('div')(({theme}) =>({
 }))
 
 export const DonIconStyle = styled(DoneIcon)(({theme}) =>({
-    backgroundColor: `${theme.palette.primary.main}`,
-     color: `${theme.palette.text.card}`, 
+    backgroundColor: theme.palette.primary.main,
+     color: theme.palette.text.card, 
      width: "16px", 
      height: "16px", 
      position: "absolute", 
