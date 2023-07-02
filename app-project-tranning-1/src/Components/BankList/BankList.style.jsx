@@ -26,9 +26,9 @@ export const Inactive = styled('div')( ({theme, styleActive}) =>({
 }))
    
 
-export const TableCellNameStyle = styled(TableCell)(({ theme }) => ({
+export const TableCellNameStyle = styled(TableCell)(({ theme, styleActive }) => ({
   borderTopLeftRadius: '16px',
-  borderBottomLeftRadius: '16px',
+  borderBottomLeftRadius: styleActive ?'' : '16px',
   borderBottom: `3px solid ${theme.palette.background.main}`,
   fontSize: '16px',
   paddingLeft: '25px !important'

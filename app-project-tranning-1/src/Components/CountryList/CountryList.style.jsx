@@ -9,7 +9,10 @@ export const CardCountry = styled('div')(({theme}) =>({
   backgroundColor: theme.palette.background.card,
   cursor: 'pointer',
   position: 'relative',
-  transition: 'all 0.3s'
+  transition: 'all 0.3s',
+  "&:hover": { 
+    transform: "scale(1.1)",
+  }
 }))
  
 

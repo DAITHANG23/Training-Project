@@ -28,11 +28,7 @@ const CountryList = () => {
     const { id, isComing } = countryItem;
     
     return (
-      <CardCountry sx={{
-          "&:hover": { 
-          transform: "scale(1.1)",
-        }
-      }} key={id} onClick={() => onChooseCard(id)} >
+      <CardCountry key={id} onClick={() => onChooseCard(id)} >
         <Country isSelected={!isComing && chooseCard === id} status={isComing}  {...countryItem} />
         {isComing && <CardIsComing>
           Comming soon...

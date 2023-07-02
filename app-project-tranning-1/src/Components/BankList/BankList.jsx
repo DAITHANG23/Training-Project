@@ -30,6 +30,8 @@ const BankList = ({ dataCountryBank }) => {
     const [cardIDOpen, setCardIDOpen] = useState([])
     const [oneOderDirection, setOneOderDirection] = useState('asc')
     const [valueToOrderBy, setvalueToOrderBy] = useState('name')
+
+    
     const descendingComparator = (a, b, orderBy) => {
         if (a[orderBy] < b[orderBy]) {
             return -1
@@ -78,7 +80,7 @@ const BankList = ({ dataCountryBank }) => {
                 size="small" sx={{
                     cursor: "pointer", backgroundColor: "#FFF",
                 }}>
-                <TableCellNameStyle >
+                <TableCellNameStyle styleActive={cardIDOpen === id ? open : ""} >
                     {name}
                 </TableCellNameStyle>
                 <TableCell width={'100px'} align='right' sx={{ borderBottom: "3px solid #F2F3FA" }}>
@@ -99,7 +101,7 @@ const BankList = ({ dataCountryBank }) => {
             <TableRow aria-label="purchases" sx={{ backgroundColor: "#FFF", }}>
                 <TableCellBankDetail component="th" colSpan={6}>
                     <Collapse key={id} in={cardIDOpen === id ? open : ""} timeout="auto" unmountOnExit>
-                        <Box sx={{ margin: 1 }}>
+                        <Box sx={{ marginTop:'30px' }}>
                             <BankDetail idBank={idBank} />
                         </Box>
                     </Collapse>

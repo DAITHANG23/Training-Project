@@ -6,6 +6,7 @@ import { LinkStyled } from './BankDetail.styled';
 import { ImageContainer } from './BankDetail.styled';
 import { ContainerContact } from './BankDetail.styled';
 import { StyledImageBank } from './BankDetail.styled';
+import { FiPhone } from "react-icons/fi";
 
 const BankDetail = (props) => {
     const { idBank } = props;
@@ -21,7 +22,7 @@ const BankDetail = (props) => {
             </ImageContainer>
             <ContainerContact  >
                {
-                data?.data.hotline && <PhoneIcon sx={{ color: "#5954E9"}} /> 
+                data?.data.hotline && <FiPhone color= {"#5954E9"} fontSize={'18px'} /> 
                } 
                 <LinkStyled href={data?.data.hotline}>{data?.data.hotline}</LinkStyled>
             </ContainerContact>

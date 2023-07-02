@@ -9,12 +9,14 @@ export const StyledImageBank = styled('img')`
     `
 export const ContainerContact = styled('div')`
         display: flex; 
-        gap: 10px
+        gap: 10px;
+        height: 30px
     `
 
 export const LinkStyled = styled(Link)(({theme})=>({
     color: `${theme.palette.primary.main}`, 
     marginBottom: "25px", 
     fontStyle: "italic", 
-    fontWeight: "600" 
+    fontWeight: "500",
+    fontSize:'17px'
 }))    
