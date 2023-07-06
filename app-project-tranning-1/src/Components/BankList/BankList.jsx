@@ -22,6 +22,7 @@ import IconButton from '@mui/material/IconButton';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { TableCellNameStyle, TableCellIconStyle, TableCellBankDetail } from './BankList.style';
+import theme from '../../theme/theme';
 
 
 const BankList = ({ dataCountryBank }) => {
@@ -78,12 +79,12 @@ const BankList = ({ dataCountryBank }) => {
 
             <TableRow key={id} onClick={() => onClickBank(id)} aria-label="expand row"
                 size="small" sx={{
-                    cursor: "pointer", backgroundColor: "#FFF",
+                    cursor: "pointer", backgroundColor: `${theme.palette.background.card}`,
                 }}>
-                <TableCellNameStyle styleActive={cardIDOpen === id ? open : ""} >
+                <TableCellNameStyle styleactive={cardIDOpen === id ? "open" : ""} >
                     {name}
                 </TableCellNameStyle>
-                <TableCell width={'100px'} align='right' sx={{ borderBottom: "3px solid #F2F3FA" }}>
+                <TableCell width={'100px'} align='right' sx={{ borderBottom: `3px solid ${theme.palette.background.main}` }}>
                     {isActive ?
                         (<ActiveCard styleActive={cardIDOpen === id ? open : ""}>
                             Active

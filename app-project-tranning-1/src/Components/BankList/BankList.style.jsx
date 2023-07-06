@@ -26,18 +26,19 @@ export const Inactive = styled('div')( ({theme, styleActive}) =>({
 }))
    
 
-export const TableCellNameStyle = styled(TableCell)(({ theme, styleActive }) => ({
+export const TableCellNameStyle = styled(TableCell)(({ theme, styleactive }) => ({
   borderTopLeftRadius: '16px',
-  borderBottomLeftRadius: styleActive ?'' : '16px',
+  borderBottomLeftRadius: styleactive==='open' ? '0px' : '16px',
   borderBottom: `3px solid ${theme.palette.background.main}`,
   fontSize: '16px',
-  paddingLeft: '25px !important'
+  paddingLeft: '25px !important',
+  
 }))
 
 
-export const TableCellIconStyle = styled(TableCell)(({ theme }) => ({
+export const TableCellIconStyle = styled(TableCell)(({ theme, styleactive }) => ({
   borderTopRightRadius: '16px',
-  borderBottomRightRadius: '16px',
+  borderBottomRightRadius: styleactive==='open' ? '0px' : '16px',
   borderBottom: `3px solid ${theme.palette.background.main}`,
 }))
 
