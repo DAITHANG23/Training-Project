@@ -6,7 +6,7 @@ export const CardCountry = styled('div')(({theme}) =>({
   height: '250px',
   borderRadius: '8px',
   textAlign: 'center',
-  backgroundColor: theme.backGroundColor.card,
+  backgroundColor: theme.palette.background.paper,
   cursor: 'pointer',
   position: 'relative',
   transition: 'all 0.3s',
@@ -18,8 +18,8 @@ export const CardCountry = styled('div')(({theme}) =>({
 
 export const CardIsComing = styled('div')(({theme}) =>({
   border: 'none',
-  backgroundColor: theme.backGroundColor.iscoming,
-  color: theme.textColor.card,
+  backgroundColor: 'rgb(48, 47, 47)',
+  color: theme.palette.text.secondary,
   borderRadius: '30px',
   padding: '10px 20px',
   zIndex: '1',

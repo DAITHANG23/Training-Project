@@ -30,8 +30,8 @@ export const ActiveCard = styled('div')(({ theme, styleActive }: ActiveCardProps
   border: 'none',
   borderRadius: '8px',
   padding: '12px 35px',
-  backgroundColor: theme.backGroundColor.active,
-  color: theme.textColor.card,
+  backgroundColor: 'rgb(7, 206, 7)',
+  color: theme.palette.text.secondary,
   opacity: styleActive ? '1' : '0.7',
 }))
 
@@ -42,8 +42,8 @@ export const Inactive = styled('div')(({ theme, styleActive }: InactiveCardProps
   border: 'none',
   borderRadius: '8px',
   padding: '12px 35px',
-  backgroundColor: theme.backGroundColor.inactive,
-  color: theme.backGroundColor.card,
+  backgroundColor:'rgb(235, 154, 4)',
+  color: theme.palette.text.secondary,
   opacity: styleActive ? '1' : '0.7',
 
 }))
@@ -52,7 +52,7 @@ export const Inactive = styled('div')(({ theme, styleActive }: InactiveCardProps
 export const TableCellNameStyle = styled(TableCell)(({ theme, styleactive }: TableCellNameProps) => ({
   borderTopLeftRadius: '16px',
   borderBottomLeftRadius: styleactive === 'open' ? '0px' : '16px',
-  borderBottom: `3px solid ${theme.backGroundColor.main}`,
+  borderBottom: `3px solid ${theme.palette.background.default}`,
   fontSize: '16px',
   paddingLeft: '25px !important',
 
@@ -62,7 +62,7 @@ export const TableCellNameStyle = styled(TableCell)(({ theme, styleactive }: Tab
 export const TableCellIconStyle = styled(TableCell)(({ theme, styleactive }: TableCellIconProps) => ({
   borderTopRightRadius: '16px',
   borderBottomRightRadius: styleactive === 'open' ? '0px' : '16px',
-  borderBottom: `3px solid ${theme.backGroundColor.main}`,
+  borderBottom: `3px solid ${theme.palette.background.default}`,
 }))
 
 
@@ -70,7 +70,7 @@ export const TableCellIconStyle = styled(TableCell)(({ theme, styleactive }: Tab
 export const TableCellBankDetail = styled(TableCell)(({ theme }) => ({
   paddingBottom: 0,
   paddingTop: 0,
-  borderBottom: `3px solid ${theme.backGroundColor.main}`,
+  borderBottom: `3px solid ${theme.palette.background.default}`,
   borderBottomLeftRadius: '16px',
   borderBottomRightRadius: '16px'
 }))

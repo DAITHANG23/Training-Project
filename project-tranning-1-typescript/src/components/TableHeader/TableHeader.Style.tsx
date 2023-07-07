@@ -7,12 +7,12 @@ export const TableHeaderStyled = styled(TableHead)(()=>({
 
 export const TableSortLabelStyle = styled(TableSortLabel)(({theme}) =>({
     '&.MuiTableSortLabel-root.Mui-active': {
-        color: `${theme.textColor.main} !important` ,
+        color: `${theme.palette.primary.contrastText} ` ,
         fontSize:"14px !important",
         fontWeight: "600 !important"
     },
     '& .MuiTableSortLabel-icon' :{
-        color: `${theme.textColor.main} !important`,
+        color: `${theme.palette.primary.contrastText} !important`,
         fontSize:"23px !important",
         fontWeight: "600 !important"
     },

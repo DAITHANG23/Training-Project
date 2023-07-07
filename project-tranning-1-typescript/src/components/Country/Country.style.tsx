@@ -49,7 +49,7 @@ export const CardCheck = styled('div')(({ theme }) => ({
 
 export const DonIconStyle = styled(DoneIcon)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
-    color: theme.textColor.card,
+    color: theme.palette.text.secondary,
     width: "16px",
     height: "16px",
     position: "absolute",

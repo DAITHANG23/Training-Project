@@ -1,26 +1,25 @@
 import { createTheme } from '@mui/material/styles';
 
+
 const theme = createTheme({
     palette: {
         primary: {
             main: '#5954E9',
+            contrastText: '#0d6efd'
         },
+        background:{
+            default:'#F2F3FA',
+            paper:'#FFF'
+        } ,
+        text: {
+           secondary:  '#FFF', 
+        },
+
         secondary: {
             main: '#CED0D6',
+              
         },
-    },
-    textColor: {
-        main: '#0d6efd',
-        card: '#FFF'
-    },
-    backGroundColor: {
-        main: '#F2F3FA',
-        card: '#FFF',
-        active: 'rgb(7, 206, 7)',
-        inactive: 'rgb(235, 154, 4)',
-        iscoming: 'rgb(48, 47, 47)'
-    },
-
+    }
 });
 
 export default theme;

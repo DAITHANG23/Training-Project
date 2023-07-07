@@ -79,12 +79,12 @@ const BankList = ({ dataCountryBank }: IbankListProps) => {
         const { id, name, isActive } = bank;
 
         return <>
-            <TableRow key={id} onClick={() => onClickBank(id)} aria-label="expand row" sx={{ cursor: "pointer", backgroundColor: `${theme.backGroundColor.card}` }}>
+            <TableRow key={id} onClick={() => onClickBank(id)} aria-label="expand row" sx={{ cursor: "pointer", backgroundColor: `${theme.palette.background.paper}` }}>
 
                 <TableCellNameStyle styleactive={cardIDOpen === id ? "open" : ""} >
                     {name}
                 </TableCellNameStyle>
-                <TableCell width={'100px'} align='right' sx={{ borderBottom: `3px solid ${theme.backGroundColor.main}` }}>
+                <TableCell width={'100px'} align='right' sx={{ borderBottom: `3px solid ${theme.palette.background.default}` }}>
                     {isActive ?
                         (<ActiveCard styleActive={cardIDOpen === id ? open : undefined}>
                             Active
