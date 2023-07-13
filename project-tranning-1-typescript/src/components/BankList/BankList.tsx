@@ -20,12 +20,16 @@ import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 type Order = "asc" | "desc";
 interface BankDataProps {
-  id: number | undefined;
-  name: string | undefined;
-  isActive: boolean | undefined;
+  id: number;
+  name: string;
+  isActive: boolean;
 }
 
-const BankList = ({ dataCountryBank }: any) => {
+const BankList = ({
+  dataCountryBank,
+}: {
+  dataCountryBank: BankDataProps[] | undefined;
+}) => {
   const [idBank, setIdBank] = useState(0);
   const [open, setOpen] = useState(false);
   const [cardIDOpen, setCardIDOpen] = useState(0);
@@ -52,7 +56,7 @@ const BankList = ({ dataCountryBank }: any) => {
   }
 
   function sortedTableRow<T>(
-    array: BankDataProps[],
+    array: BankDataProps[] | undefined,
     comparator: (a: T, b: T) => number
   ) {
     const stabilizedThis = array?.map(
@@ -70,7 +74,7 @@ const BankList = ({ dataCountryBank }: any) => {
     return stabilizedThis?.map((el) => el[0]);
   }
 
-  const onClickBank = (bankId: any) => {
+  const onClickBank = (bankId: number) => {
     setIdBank(bankId);
     setCardIDOpen(bankId);
     setOpen(!open);

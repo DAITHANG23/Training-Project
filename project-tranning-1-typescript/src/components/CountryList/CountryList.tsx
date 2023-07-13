@@ -15,9 +15,7 @@ interface BankData {
 }
 
 const CountryList = (): JSX.Element => {
-  const [dataCountryBank, setDataCountryBank] = useState<
-    BankData[] | undefined
-  >();
+  const [dataCountryBank, setDataCountryBank] = useState<BankData[]>();
   const [chooseCard, setChooseCard] = useState(0);
 
   const { data, error, isLoading } = useCountry();
@@ -31,7 +29,7 @@ const CountryList = (): JSX.Element => {
     setChooseCard(cardId);
   };
 
-  const countryItem = data?.map((countryItem: any) => {
+  const countryItem = data?.map((countryItem) => {
     const { id, isComing } = countryItem;
 
     return (

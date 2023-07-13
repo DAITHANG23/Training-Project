@@ -14,7 +14,6 @@ interface CountryProps {
   isComing: boolean;
   status: boolean;
   isSelected: boolean;
-  theme: any;
 }
 const Country = ({
   id,

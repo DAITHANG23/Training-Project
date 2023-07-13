@@ -1,3 +1,4 @@
+import theme from "@/theme/theme";
 import {
   styled,
   TableCell,
@@ -7,22 +8,22 @@ import {
 } from "@mui/material";
 
 interface ActiveCardProps {
-  theme?: any;
+  theme?: typeof theme;
   styleActive: boolean | undefined;
 }
 
 interface InactiveCardProps {
-  theme?: any;
+  theme?: typeof theme;
   styleActive: boolean | undefined;
 }
 
 interface TableCellNameProps {
-  theme?: any;
+  theme?: typeof theme;
   styleactive: string;
 }
 
 interface TableCellIconProps {
-  theme?: any;
+  theme?: typeof theme;
   styleactive?: string;
 }
 
@@ -34,7 +35,7 @@ export const ActiveCard = styled("div")(
     borderRadius: "8px",
     padding: "12px 35px",
     backgroundColor: "rgb(7, 206, 7)",
-    color: theme.palette.text.secondary,
+    color: theme?.palette.text.secondary,
     opacity: styleActive ? "1" : "0.7",
   })
 );
@@ -47,7 +48,7 @@ export const Inactive = styled("div")(
     borderRadius: "8px",
     padding: "12px 35px",
     backgroundColor: "rgb(235, 154, 4)",
-    color: theme.palette.text.secondary,
+    color: theme?.palette.text.secondary,
     opacity: styleActive ? "1" : "0.7",
   })
 );
@@ -56,7 +57,7 @@ export const TableCellNameStyle = styled(TableCell)(
   ({ theme, styleactive }: TableCellNameProps) => ({
     borderTopLeftRadius: "16px",
     borderBottomLeftRadius: styleactive === "open" ? "0px" : "16px",
-    borderBottom: `3px solid ${theme.palette.background.default}`,
+    borderBottom: `3px solid ${theme?.palette.background.default}`,
     fontSize: "16px",
     paddingLeft: "25px !important",
   })
@@ -66,7 +67,7 @@ export const TableCellIconStyle = styled(TableCell)(
   ({ theme, styleactive }: TableCellIconProps) => ({
     borderTopRightRadius: "16px",
     borderBottomRightRadius: styleactive === "open" ? "0px" : "16px",
-    borderBottom: `3px solid ${theme.palette.background.default}`,
+    borderBottom: `3px solid ${theme?.palette.background.default}`,
   })
 );
 
