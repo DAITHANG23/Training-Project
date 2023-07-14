@@ -63,7 +63,6 @@ const BankList = ({
       (el, index) => [el, index] as [T, number]
     );
 
-    console.log(stabilizedThis);
     stabilizedThis?.sort((a, b) => {
       const order = comparator(a[0], b[0]);
       if (order !== 0) {
