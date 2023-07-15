@@ -19,8 +19,7 @@ const BankDetail = (props: BankDetailProps) => {
   const { data, error } = useBankDetail(idBank);
   if (error instanceof Error)
     return <>{"An error has occurred: " + error.message}</>;
-  // const dataBankDetail = data;
-  console.log("dataBankDetail", data);
+
   return (
     <div key={data?.id}>
       <TypographyStyled variant="h5">{data?.name}</TypographyStyled>

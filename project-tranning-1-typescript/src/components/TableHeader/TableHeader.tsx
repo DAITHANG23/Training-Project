@@ -6,17 +6,21 @@ import {
   TableCellBankNameStyled,
   TableCellLabelStyled,
 } from "@/components/TableHeader/TableHeader.Style";
-
+interface BankData {
+  id: number;
+  name: string;
+  isActive: boolean;
+}
 interface TableHeaderProps {
-  valueToOrderBy: string;
+  valueToOrderBy: keyof BankData;
   oneOderDirection: "asc" | "desc";
-  handleRequestSort: (property: string) => void;
+  handleRequestSort: (property: keyof BankData) => void;
 }
 
 const TableHeader = (props: TableHeaderProps) => {
   const { valueToOrderBy, oneOderDirection, handleRequestSort } = props;
 
-  const createSortHandle = (property: string) => {
+  const createSortHandle = (property: keyof BankData) => {
     handleRequestSort(property);
   };
   return (
@@ -33,11 +37,11 @@ const TableHeader = (props: TableHeaderProps) => {
           </TableSortLabelStyle>
         </TableCellBankNameStyled>
 
-        <TableCellLabelStyled key={"status"} align="center">
+        <TableCellLabelStyled key={"isActive"} align="center">
           <TableSortLabel
-            direction={valueToOrderBy === "status" ? oneOderDirection : "asc"}
+            direction={valueToOrderBy === "isActive" ? oneOderDirection : "asc"}
             IconComponent={KeyboardArrowDownIcon}
-            onClick={() => createSortHandle("status")}
+            onClick={() => createSortHandle("isActive")}
           >
             Status
           </TableSortLabel>

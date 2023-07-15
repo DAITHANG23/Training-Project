@@ -32,9 +32,11 @@ const BankList = ({
 }) => {
   const [idBank, setIdBank] = useState(0);
   const [open, setOpen] = useState(false);
+  const [styled, setStyled] = useState("");
   const [cardIDOpen, setCardIDOpen] = useState(0);
   const [oneOderDirection, setOneOderDirection] = useState<Order>("asc");
-  const [valueToOrderBy, setvalueToOrderBy] = useState("name");
+  const [valueToOrderBy, setvalueToOrderBy] =
+    useState<keyof BankDataProps>("name");
 
   function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
     if (a[orderBy] < b[orderBy]) {
@@ -77,9 +79,10 @@ const BankList = ({
     setIdBank(bankId);
     setCardIDOpen(bankId);
     setOpen(!open);
+    setStyled("style");
   };
 
-  const handleRequestSort = (property: string) => {
+  const handleRequestSort = (property: keyof BankDataProps) => {
     const isAscending =
       valueToOrderBy === property && oneOderDirection === "asc";
     setvalueToOrderBy(property);
@@ -99,7 +102,7 @@ const BankList = ({
           onClick={() => onClickBank(id)}
           aria-label="expand row"
         >
-          <TableCellNameStyle styleactive={cardIDOpen === id ? "open" : ""}>
+          <TableCellNameStyle styleactive={cardIDOpen === id ? styled : ""}>
             {name}
           </TableCellNameStyle>
           <TableCellActiveStyled width={"100px"} align="right">
@@ -113,7 +116,11 @@ const BankList = ({
               </Inactive>
             )}
           </TableCellActiveStyled>
-          <TableCellIconStyle width={"50px"} align="right">
+          <TableCellIconStyle
+            width={"50px"}
+            align="right"
+            styleactive={cardIDOpen === id ? styled : ""}
+          >
             <IconButton>
               {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
             </IconButton>
