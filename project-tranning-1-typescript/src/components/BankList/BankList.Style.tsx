@@ -19,12 +19,12 @@ interface InactiveCardProps {
 
 interface TableCellNameProps {
   theme?: typeof theme;
-  styleactive: string;
+  styleactive: boolean;
 }
 
 interface TableCellIconProps {
   theme?: typeof theme;
-  styleactive: string;
+  styleactive: boolean;
 }
 
 export const ActiveCard = styled("div")(
@@ -56,7 +56,7 @@ export const Inactive = styled("div")(
 export const TableCellNameStyle = styled(TableCell)(
   ({ theme, styleactive }: TableCellNameProps) => ({
     borderTopLeftRadius: "16px",
-    borderBottomLeftRadius: styleactive === "style" ? "0px" : "16px",
+    borderBottomLeftRadius: styleactive ? "0px" : "16px",
     borderBottom: `3px solid ${theme?.palette.background.default}`,
     fontSize: "16px",
     paddingLeft: "25px !important",
@@ -66,7 +66,7 @@ export const TableCellNameStyle = styled(TableCell)(
 export const TableCellIconStyle = styled(TableCell)(
   ({ theme, styleactive }: TableCellIconProps) => ({
     borderTopRightRadius: "16px",
-    borderBottomRightRadius: styleactive === "style" ? "0px" : "16px",
+    borderBottomRightRadius: styleactive ? "0px" : "16px",
     borderBottom: `3px solid ${theme?.palette.background.default}`,
   })
 );

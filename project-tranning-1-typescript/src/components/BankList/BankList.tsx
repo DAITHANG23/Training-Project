@@ -32,7 +32,6 @@ const BankList = ({
 }) => {
   const [idBank, setIdBank] = useState(0);
   const [open, setOpen] = useState(false);
-  const [styled, setStyled] = useState("");
   const [cardIDOpen, setCardIDOpen] = useState(0);
   const [oneOderDirection, setOneOderDirection] = useState<Order>("asc");
   const [valueToOrderBy, setvalueToOrderBy] =
@@ -79,7 +78,7 @@ const BankList = ({
     setIdBank(bankId);
     setCardIDOpen(bankId);
     setOpen(!open);
-    setStyled("style");
+    // setStyled("style");
   };
 
   const handleRequestSort = (property: keyof BankDataProps) => {
@@ -102,7 +101,7 @@ const BankList = ({
           onClick={() => onClickBank(id)}
           aria-label="expand row"
         >
-          <TableCellNameStyle styleactive={cardIDOpen === id ? styled : ""}>
+          <TableCellNameStyle styleactive={cardIDOpen === id && open}>
             {name}
           </TableCellNameStyle>
           <TableCellActiveStyled width={"100px"} align="right">
@@ -119,10 +118,14 @@ const BankList = ({
           <TableCellIconStyle
             width={"50px"}
             align="right"
-            styleactive={cardIDOpen === id ? styled : ""}
+            styleactive={cardIDOpen === id && open}
           >
             <IconButton>
-              {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+              {cardIDOpen === id && open ? (
+                <KeyboardArrowUpIcon />
+              ) : (
+                <KeyboardArrowDownIcon />
+              )}
             </IconButton>
           </TableCellIconStyle>
         </TableRowTitleStyled>
