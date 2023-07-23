@@ -5,7 +5,7 @@ export const ImageContainer = styled("div")`
   margin-bottom: 10px;
 `;
 export const StyledImageBank = styled("img")`
-  width: "100%";
+  width: 100%;
 `;
 export const ContainerContact = styled("div")`
   display: flex;
