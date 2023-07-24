@@ -10,6 +10,6 @@ body {
   height: 960px;
 }
 
-::placeholder {
+/* ::placeholder {
   color: #c5cacd;
-}
+} */

@@ -1,5 +1,5 @@
-import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useForm, Controller } from "react-hook-form";
+import { useState } from "react";
 import {
   BoxFormNumberPhone,
   ImgLogo,
@@ -12,30 +12,44 @@ import {
   BoxLinkStyled,
   ContentError,
 } from "@/components/FormLoginByNumberPhone/FormLoginByNumberPhone.style";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { matchIsValidTel } from "mui-tel-input";
 
-interface DataForm {
-  numberPhone: string;
+export interface DataFormLog {
+  tel: string | undefined;
 }
-
-const FormLoginByNumberPhone = () => {
-  const { register, handleSubmit, formState } = useForm<DataForm>();
-  const { errors } = formState;
-  const [dataLogin, setDataLogin] = useState<DataForm>();
+interface DataFormProps {
+  onSetDalaLoginNumberPhone: (dataLogin: DataFormLog) => void;
+}
+const FormLoginByNumberPhone = ({
+  onSetDalaLoginNumberPhone,
+}: DataFormProps) => {
+  // const { register, handleSubmit, formState } = useForm<DataFormLog>();
+  // const { errors } = formState;
   const [isLogin, setIsLogin] = useState(false);
 
-  useEffect(() => {
-    window.localStorage.setItem("successLogin", JSON.stringify(dataLogin));
-  }, [dataLogin]);
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      tel: "",
+    },
+  });
 
   const onFormSubmitLoginNumberPhoneHandle = handleSubmit((dataLogin) => {
-    setDataLogin(dataLogin);
+    onSetDalaLoginNumberPhone(dataLogin);
     if (dataLogin) {
       setIsLogin(true);
     }
   });
-
-  console.log("datalogin", dataLogin);
+  const handleChange = (value: string) => {
+    matchIsValidTel(value);
+  };
+  const navigate = useNavigate();
+  const onNavigateToFillForm = () => {
+    const to = "/LoginFillCode";
+    if (isLogin) {
+      navigate(to);
+    }
+  };
   return (
     <BoxFormNumberPhone onSubmit={onFormSubmitLoginNumberPhoneHandle}>
       <ImgLogo src="../images/logo.png" alt="logo" />
@@ -43,27 +57,31 @@ const FormLoginByNumberPhone = () => {
       <TitleTypo variant="h4">Energy Monitoring System</TitleTypo>
       <InputContainer variant="standard">
         <LabelStyled htmlFor="numberphone">Phone number *</LabelStyled>
-        <InputStyled
-          id="numberphone"
-          type="tel"
-          {...register("numberPhone", {
-            required: {
-              value: true,
-              message: "Vui lòng nhập số điện thoại",
-            },
-            // pattern: {
-            //   value: /^\+\d{2}\ \d{4} \d{4}$/,
-            //   message: "lỗi",
-            // },
-          })}
+
+        <Controller
+          name="tel"
+          control={control}
+          rules={{
+            required: true,
+          }}
+          render={({ field, fieldState }) => (
+            <InputStyled
+              {...field}
+              onlyCountries={["SG"]}
+              helperText={fieldState.invalid ? "Tel is invalid" : ""}
+              error={fieldState.invalid}
+              // onChange={handleChange}
+            />
+          )}
         />
-        <ContentError>{errors.numberPhone?.message}</ContentError>
       </InputContainer>
-      {/* <Link to="/LoginFillCode"> */}
-      <ButtonStyled type="submit" variant="contained">
+      <ButtonStyled
+        onClick={onNavigateToFillForm}
+        type="submit"
+        variant="contained"
+      >
         GET CODE
       </ButtonStyled>
-      {/* </Link> */}
 
       <BoxLinkStyled>
         <Link to="/" style={{ textDecoration: "none" }}>

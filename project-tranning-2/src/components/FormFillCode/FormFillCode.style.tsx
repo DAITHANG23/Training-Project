@@ -1,32 +1,31 @@
 import theme from "@/themes/theme";
 import { Typography, styled, Button, Box, FormControl } from "@mui/material";
-
-interface ContainerImgLogoProps {
+import { MuiOtpInput } from "mui-one-time-password-input";
+interface ContainerProps {
   theme: typeof theme;
 }
+interface BtnProps {
+  styleactive: boolean | undefined;
+  theme?: typeof theme;
+}
+export const BoxFormFillCode = styled("form")(({ theme }: ContainerProps) => ({
+  width: "510px",
+  textAlign: "center",
+  border: "none",
+  padding: theme.spacing(5),
+  boxShadow: "0px -4px 16px 0px #0000000D",
+  margin: " 170px 300px 170px 260px",
+}));
 
-export const BoxFormFillCode = styled("form")(
-  ({ theme }: ContainerImgLogoProps) => ({
-    width: "510px",
-    textAlign: "center",
-    border: "none",
-    padding: theme.spacing(5),
-    boxShadow: "0px -4px 16px 0px #0000000D",
-    margin: " 170px 300px 170px 260px",
-  })
-);
-
-export const ImgLogo = styled("img")(({ theme }: ContainerImgLogoProps) => ({
+export const ImgLogo = styled("img")(({ theme }: ContainerProps) => ({
   width: "43%",
 }));
 
-export const TitleTypo = styled(Typography)(
-  ({ theme }: ContainerImgLogoProps) => ({
-    fontSize: "24px",
-    fontWeight: "400",
-    paddingTop: theme.spacing(2),
-  })
-);
+export const TitleTypo = styled(Typography)(({ theme }: ContainerProps) => ({
+  fontSize: "24px",
+  fontWeight: "400",
+  paddingTop: theme.spacing(2),
+}));
 
 export const ContentEmail = styled("div")(({ theme }) => ({
   paddingTop: theme.spacing(4),
@@ -42,40 +41,45 @@ export const EmailStyled = styled(Typography)(() => ({
   fontSize: "16px",
 }));
 
-export const InputStyled = styled("input")(
-  ({ theme }: ContainerImgLogoProps) => ({
+export const InputStyled = styled(MuiOtpInput)(({ theme }: ContainerProps) => ({
+  "& .MuiInputBase-root": {
+    borderRadius: "1000px",
     width: "56px",
     height: "56px",
-    borderRadius: "1000px",
-    border: `1px solid ${theme.palette.text.primary}`,
-    padding: theme.spacing(1),
+    border: `1px solid ${theme.palette.primary.contrastText}`,
     textAlign: "center",
     fontSize: "24px",
     fontWeight: 400,
-  })
-);
+  },
+  " & .MuiOutlinedInput-root": {
+    "&.Mui-focused fieldset": {
+      borderColor: theme.palette.primary.contrastText,
+    },
+  },
+}));
 
 export const ButtonStyled = styled(Button)(
-  ({ theme }: ContainerImgLogoProps) => ({
+  ({ theme, styleactive }: BtnProps) => ({
     width: "100%",
-    color: theme.palette.background.paper,
+    color: styleactive ? `${theme?.palette.background.paper}` : "#94999C",
     border: "none",
     borderRadius: "1000px",
-    marginTop: theme.spacing(3),
+    marginTop: theme?.spacing(3),
+    backgroundColor: styleactive ? `${theme?.palette.primary.main}` : "#F3F5F6",
   })
 );
-export const BoxLinkStyled = styled(Box)(
-  ({ theme }: ContainerImgLogoProps) => ({
-    paddingTop: theme.spacing(3),
-  })
-);
-export const LinkStyled = styled("p")(({ theme }: ContainerImgLogoProps) => ({
+export const BoxLinkStyled = styled(Box)(({ theme }: ContainerProps) => ({
+  paddingTop: theme.spacing(3),
+}));
+export const LinkStyled = styled("p")(({ theme }: ContainerProps) => ({
   textDecoration: "none",
   cursor: "pointer",
+  color: theme.palette.primary.main,
+  fontSize: "16px",
 }));
 
 export const InputContainer = styled(FormControl)(
-  ({ theme }: ContainerImgLogoProps) => ({
+  ({ theme }: ContainerProps) => ({
     paddingTop: theme.spacing(3),
     width: "100%",
     display: "flex",
@@ -89,7 +93,7 @@ export const ContainerTitle = styled("div")(({ theme }) => ({
 export const TitleReceiveCode = styled("span")(({ theme }) => ({
   fontWeight: 400,
   fontSize: "16px",
-  color: theme.palette.primary.contrastText,
+  color: theme.palette.text.primary,
 }));
 
 export const TitleResentCode = styled("button")(({ theme }) => ({

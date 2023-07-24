@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   BoxFormGmail,
   ImgLogo,
@@ -12,28 +12,36 @@ import {
   BoxLinkStyled,
   ContentError,
 } from "./FormLoginByGmail.style";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-interface DataForm {
-  email: string;
+export interface DataForm {
+  email: string | undefined;
 }
 
-const FormLoginByGmail = () => {
+interface DataFormProps {
+  onSetDalaLogin: (dataLogin: DataForm) => void;
+}
+
+const FormLoginByGmail = ({ onSetDalaLogin }: DataFormProps) => {
   const { register, handleSubmit, formState } = useForm<DataForm>();
   const { errors } = formState;
-  const [dataLogin, setDataLogin] = useState<DataForm>();
   const [isLogin, setIsLogin] = useState(false);
 
-  useEffect(() => {
-    window.localStorage.setItem("successLogin", JSON.stringify(dataLogin));
-  }, [dataLogin]);
-
   const onFormSubmitLoginEmailHandle = handleSubmit((dataLogin) => {
-    setDataLogin(dataLogin);
     if (dataLogin) {
       setIsLogin(true);
     }
+    onSetDalaLogin(dataLogin);
   });
+
+  const navigate = useNavigate();
+  const onNavigateToFillForm = () => {
+    const to = "/LoginFillCode";
+
+    if (isLogin) {
+      navigate(to);
+    }
+  };
 
   return (
     <BoxFormGmail onSubmit={onFormSubmitLoginEmailHandle}>
@@ -59,11 +67,13 @@ const FormLoginByGmail = () => {
         <ContentError>{errors.email?.message}</ContentError>
       </InputContainer>
 
-      {/* <Link to="/LoginFillCode"> */}
-      <ButtonStyled type="submit" variant="contained">
+      <ButtonStyled
+        onClick={onNavigateToFillForm}
+        type="submit"
+        variant="contained"
+      >
         GET CODE
       </ButtonStyled>
-      {/* </Link> */}
 
       <BoxLinkStyled>
         <Link to="/LoginByNumber" style={{ textDecoration: "none" }}>
