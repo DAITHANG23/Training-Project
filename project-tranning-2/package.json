@@ -16,6 +16,8 @@
     "@types/react-dom": "^18.2.7",
     "mui-one-time-password-input": "^1.1.2",
     "mui-tel-input": "^3.2.2",
+    "otp-timer": "^1.1.5",
+    "otp-timer-ts": "^2.1.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.45.2",

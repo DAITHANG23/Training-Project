@@ -19,7 +19,7 @@ export interface DataForm {
 }
 
 interface DataFormProps {
-  onSetDalaLogin: (dataLogin: DataForm) => void;
+  onSetDalaLogin: (dataLogin: DataForm, id: number) => void;
 }
 
 const FormLoginByGmail = ({ onSetDalaLogin }: DataFormProps) => {
@@ -31,7 +31,8 @@ const FormLoginByGmail = ({ onSetDalaLogin }: DataFormProps) => {
     if (dataLogin) {
       setIsLogin(true);
     }
-    onSetDalaLogin(dataLogin);
+    const id = 2;
+    onSetDalaLogin(dataLogin, id);
   });
 
   const navigate = useNavigate();
@@ -63,6 +64,7 @@ const FormLoginByGmail = ({ onSetDalaLogin }: DataFormProps) => {
               message: "Nhập e-mail không đúng",
             },
           })}
+          aria-invalid={errors.email ? "true" : "false"}
         />
         <ContentError>{errors.email?.message}</ContentError>
       </InputContainer>

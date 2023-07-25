@@ -1,4 +1,4 @@
-import { styled, Box, Typography } from "@mui/material";
+import { styled, Box, Typography, Alert } from "@mui/material";
 import theme from "@/themes/theme";
 
 interface ContainerProps {
@@ -8,6 +8,7 @@ export const BoxContainer = styled(Box)(() => ({
   display: "flex",
   position: "relative",
   height: "960px",
+  maxWidth: "1440px",
 }));
 export const ImageLogo = styled("img")(() => ({
   width: "25.6%",
@@ -24,4 +25,19 @@ export const Typo = styled(Typography)(({ theme }: ContainerProps) => ({
   lineHeight: "24px",
   width: "400px",
   textAlign: "center",
+}));
+
+export const BoxAlertStyled = styled(Box)(() => ({
+  position: "absolute",
+  top: "32px",
+  left: "680px",
+}));
+
+export const AlertStyled = styled(Alert)(({ theme }) => ({
+  width: "411px",
+  backgroundColor: "#268278",
+  color: "#FFFF",
+  fontSize: "14px",
+  padding: theme.spacing(0, 2),
+  borderRadius: "1000px",
 }));

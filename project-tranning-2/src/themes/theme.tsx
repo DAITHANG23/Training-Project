@@ -18,7 +18,7 @@ const theme = createTheme({
       main: "#E21350",
     },
   },
-  spacing: [0, 12, 16, 32, 48, 56, 170],
+  spacing: [8, 12, 16, 32, 48, 56, 170],
 });
 
 export default theme;

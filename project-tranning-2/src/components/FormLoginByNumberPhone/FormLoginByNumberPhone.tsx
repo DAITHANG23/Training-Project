@@ -10,22 +10,18 @@ import {
   ButtonStyled,
   LinkStyled,
   BoxLinkStyled,
-  ContentError,
 } from "@/components/FormLoginByNumberPhone/FormLoginByNumberPhone.style";
 import { Link, useNavigate } from "react-router-dom";
-import { matchIsValidTel } from "mui-tel-input";
 
 export interface DataFormLog {
   tel: string | undefined;
 }
 interface DataFormProps {
-  onSetDalaLoginNumberPhone: (dataLogin: DataFormLog) => void;
+  onSetDalaLoginNumberPhone: (dataLogin: DataFormLog, id: number) => void;
 }
 const FormLoginByNumberPhone = ({
   onSetDalaLoginNumberPhone,
 }: DataFormProps) => {
-  // const { register, handleSubmit, formState } = useForm<DataFormLog>();
-  // const { errors } = formState;
   const [isLogin, setIsLogin] = useState(false);
 
   const { control, handleSubmit } = useForm({
@@ -35,14 +31,13 @@ const FormLoginByNumberPhone = ({
   });
 
   const onFormSubmitLoginNumberPhoneHandle = handleSubmit((dataLogin) => {
-    onSetDalaLoginNumberPhone(dataLogin);
+    const id = 3;
+    onSetDalaLoginNumberPhone(dataLogin, id);
     if (dataLogin) {
       setIsLogin(true);
     }
   });
-  const handleChange = (value: string) => {
-    matchIsValidTel(value);
-  };
+
   const navigate = useNavigate();
   const onNavigateToFillForm = () => {
     const to = "/LoginFillCode";
@@ -67,10 +62,9 @@ const FormLoginByNumberPhone = ({
           render={({ field, fieldState }) => (
             <InputStyled
               {...field}
-              onlyCountries={["SG"]}
+              defaultCountry={"SG"}
               helperText={fieldState.invalid ? "Tel is invalid" : ""}
               error={fieldState.invalid}
-              // onChange={handleChange}
             />
           )}
         />
