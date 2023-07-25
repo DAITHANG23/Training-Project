@@ -21,8 +21,8 @@ import {
   SecondResentCode,
 } from "@/components/FormFillCode/FormFillCode.style";
 import { useNavigate } from "react-router-dom";
-import { DataForm } from "../FormLoginByGmail/FormLoginByGmail";
-import { DataFormLog } from "../FormLoginByNumberPhone/FormLoginByNumberPhone";
+import { DataForm } from "@/components/FormLoginByGmail/FormLoginByGmail";
+import { DataFormLog } from "@/components/FormLoginByNumberPhone/FormLoginByNumberPhone";
 import { Controller, useForm, SubmitHandler } from "react-hook-form";
 import { Box } from "@mui/material";
 
