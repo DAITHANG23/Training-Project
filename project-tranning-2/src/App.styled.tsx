@@ -27,13 +27,13 @@ export const Typo = styled(Typography)(({ theme }: ContainerProps) => ({
   textAlign: "center",
 }));
 
-export const BoxAlertStyled = styled(Box)(() => ({
+export const StyledBoxAlert = styled(Box)(() => ({
   position: "absolute",
   top: "32px",
   left: "680px",
 }));
 
-export const AlertStyled = styled(Alert)(({ theme }) => ({
+export const StyledAlert = styled(Alert)(({ theme }) => ({
   width: "411px",
   backgroundColor: "#268278",
   color: "#FFFF",

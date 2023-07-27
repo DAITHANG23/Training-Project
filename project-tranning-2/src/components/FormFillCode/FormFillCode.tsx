@@ -1,56 +1,50 @@
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useRef } from "react";
 import {
   BoxFormFillCode,
   ImgLogo,
   TitleTypo,
   ContentEmail,
-  EmailStyled,
-  ButtonStyled,
-  LinkStyled,
+  StyledEmail,
+  StyledButton,
+  StyledLink,
   BoxLinkStyled,
-  ContentStyled,
+  StyledContent,
   InputContainer,
-  InputStyled,
+  StyledInput,
   TitleReceiveCode,
   MinuteResentCode,
   ContainerTitle,
-  FormHelperTextStyled,
+  StyledFormHelperText,
   ButtonResendCode,
   TitleResendProps,
   SecondResentCode,
 } from "@/components/FormFillCode/FormFillCode.style";
-import { useNavigate } from "react-router-dom";
-import { DataForm } from "@/components/FormLoginByGmail/FormLoginByGmail";
-import { DataFormLog } from "@/components/FormLoginByNumberPhone/FormLoginByNumberPhone";
+
+import { DataForm } from "@/components/FormLoginByGmail/FormLogin";
 import { Controller, useForm, SubmitHandler } from "react-hook-form";
 import { Box } from "@mui/material";
 
 interface DataFillProps {
-  dataLogin: DataForm | undefined;
-  dataLoginNumberPhone: DataFormLog | undefined;
-  onSetOtp: (value: IHandleSubmit) => void;
-  isIdLoginByEmail: number | undefined;
+  dataLogin?: DataForm;
+  onVerify: (value: boolean) => void;
+  onBack: () => void;
+  isLoginBySMS?: boolean;
 }
 
 export interface IHandleSubmit {
-  otp: string;
+  otp?: string;
 }
 
 const FormFillCode = ({
   dataLogin,
-  dataLoginNumberPhone,
-  onSetOtp,
-  isIdLoginByEmail,
+  onVerify,
+  onBack,
+  isLoginBySMS,
 }: DataFillProps) => {
   const [isComplete, setIsComplete] = useState(false);
-  const [otp, setOtp] = useState<IHandleSubmit>();
 
-  const navigate = useNavigate();
-  const onNavigateToBack = () => {
-    const to = -1;
-    navigate(to);
-  };
+  const [minutes, setMinutes] = useState(1);
+  const [seconds, setSeconds] = useState(59);
 
   const { control, handleSubmit } = useForm({
     defaultValues: {
@@ -58,12 +52,29 @@ const FormFillCode = ({
     },
   });
 
+  const OTP_PASS = "989999";
+  let interval: NodeJS.Timer;
+  const ref = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    onTimeHandler();
+    return () => {
+      clearInterval(interval);
+    };
+  });
+
+  useEffect(() => {
+    if (isComplete) {
+      ref.current?.click();
+    }
+  }, [isComplete]);
+
   const handleChange: SubmitHandler<IHandleSubmit> = (newValue) => {
-    setOtp(newValue);
-    onSetOtp(newValue);
+    if (newValue.otp === OTP_PASS) {
+      return onVerify(true);
+    }
   };
 
-  console.log("otp", otp);
   const onChangeValueOtp = (value: string) => {
     if (value.length !== 6) {
       return setIsComplete(false);
@@ -72,11 +83,8 @@ const FormFillCode = ({
     }
   };
 
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
+  const onTimeHandler = () => {
+    interval = setInterval(() => {
       if (seconds > 0) {
         setSeconds(seconds - 1);
       }
@@ -90,35 +98,40 @@ const FormFillCode = ({
         }
       }
     }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  });
+  };
 
   const resendOTP = () => {
-    setMinutes(1);
-    setSeconds(59);
+    setMinutes(minutes ? minutes : 1);
+    setSeconds(seconds ? seconds : 59);
   };
+
+  function matchIsNumeric(text: string) {
+    const isNumber = typeof text === "number";
+    return (isNumber || text !== "Spacebar") && !isNaN(Number(text));
+  }
+
+  const validateChar = (value: string, index: number) => {
+    return matchIsNumeric(value);
+  };
+
   return (
     <BoxFormFillCode onSubmit={handleSubmit(handleChange)}>
       <ImgLogo src="../images/logo.png" alt="logo" />
 
       <TitleTypo variant="h4">Energy Monitoring System</TitleTypo>
-
-      {isIdLoginByEmail === 2 ? (
+      {isLoginBySMS ? (
         <ContentEmail>
-          <ContentStyled>
-            A 4 digit code has been sent to your email
-          </ContentStyled>
-          <EmailStyled>{dataLogin?.email}</EmailStyled>
+          <StyledContent>
+            A 4 digit code has been sent to phone number
+          </StyledContent>
+          <StyledEmail>{dataLogin?.tel}</StyledEmail>
         </ContentEmail>
       ) : (
         <ContentEmail>
-          <ContentStyled>
-            A 4 digit code has been sent to phone number
-          </ContentStyled>
-          <EmailStyled>{dataLoginNumberPhone?.tel}</EmailStyled>
+          <StyledContent>
+            A 4 digit code has been sent to your email
+          </StyledContent>
+          <StyledEmail>{dataLogin?.email}</StyledEmail>
         </ContentEmail>
       )}
 
@@ -132,7 +145,7 @@ const FormFillCode = ({
           }}
           render={({ field, fieldState }) => (
             <Box>
-              <InputStyled
+              <StyledInput
                 {...field}
                 length={6}
                 gap={"12px"}
@@ -143,12 +156,13 @@ const FormFillCode = ({
                 }}
                 onComplete={onChangeValueOtp}
                 styleError={fieldState.invalid}
+                validateChar={validateChar}
               />
 
               {fieldState.invalid ? (
-                <FormHelperTextStyled error>
+                <StyledFormHelperText error>
                   Wrong verify code. Please try again
-                </FormHelperTextStyled>
+                </StyledFormHelperText>
               ) : null}
             </Box>
           )}
@@ -160,11 +174,6 @@ const FormFillCode = ({
 
         <Box>
           {seconds > 0 || minutes > 0 ? (
-            <></>
-          ) : (
-            <ButtonResendCode onClick={resendOTP}>Resend</ButtonResendCode>
-          )}
-          {seconds > 0 || minutes > 0 ? (
             <TitleResendProps>
               Resend after
               <MinuteResentCode>
@@ -175,17 +184,22 @@ const FormFillCode = ({
               </SecondResentCode>
             </TitleResendProps>
           ) : (
-            <></>
+            <ButtonResendCode onClick={resendOTP}>Resend</ButtonResendCode>
           )}
         </Box>
       </ContainerTitle>
 
-      <ButtonStyled styleactive={isComplete} type="submit" variant="contained">
+      <StyledButton
+        ref={ref}
+        styleactive={isComplete}
+        type="submit"
+        variant="contained"
+      >
         VERIFY
-      </ButtonStyled>
+      </StyledButton>
 
       <BoxLinkStyled>
-        <LinkStyled onClick={() => onNavigateToBack()}>Back</LinkStyled>
+        <StyledLink onClick={onBack}>Back</StyledLink>
       </BoxLinkStyled>
     </BoxFormFillCode>
   );

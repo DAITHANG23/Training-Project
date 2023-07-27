@@ -48,17 +48,17 @@ export const ContentEmail = styled("div")(({ theme }) => ({
   textAlign: "center",
 }));
 
-export const ContentStyled = styled(Typography)(() => ({
+export const StyledContent = styled(Typography)(() => ({
   fontSize: "16px",
   fontWeight: 400,
 }));
 
-export const EmailStyled = styled(Typography)(() => ({
+export const StyledEmail = styled(Typography)(() => ({
   fontWeight: 700,
   fontSize: "16px",
 }));
 
-export const InputStyled = styled(MuiOtpInput)(
+export const StyledInput = styled(MuiOtpInput)(
   ({ theme, styleError }: InputProps) => ({
     "& .MuiInputBase-root": {
       borderRadius: "1000px",
@@ -85,7 +85,7 @@ export const InputStyled = styled(MuiOtpInput)(
   })
 );
 
-export const ButtonStyled = styled(Button)(
+export const StyledButton = styled(Button)(
   ({ theme, styleactive }: BtnProps) => ({
     width: "100%",
     color: styleactive ? `${theme?.palette.background.paper}` : "#94999C",
@@ -100,7 +100,7 @@ export const BoxLinkStyled = styled(Box)(({ theme }: ContainerProps) => ({
   paddingTop: theme.spacing(3),
 }));
 
-export const LinkStyled = styled("p")(({ theme }: ContainerProps) => ({
+export const StyledLink = styled("p")(({ theme }: ContainerProps) => ({
   textDecoration: "none",
   cursor: "pointer",
   color: theme.palette.primary.main,
@@ -140,7 +140,7 @@ export const ButtonResendCode = styled("button")(
     cursor: "pointer",
     fontSize: "16px",
     fontWeight: 400,
-    paddingTop: "4px",
+    paddingTop: "3px",
   })
 );
 
@@ -156,7 +156,7 @@ export const TitleResendProps = styled("p")(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-export const FormHelperTextStyled = styled(FormHelperText)(({ theme }) => ({
+export const StyledFormHelperText = styled(FormHelperText)(({ theme }) => ({
   paddingTop: theme.spacing(3),
   textAlign: "center",
   fontSize: "16px",

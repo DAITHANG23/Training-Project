@@ -3,88 +3,70 @@ import {
   BoxContainer,
   ImageLogo,
   Typo,
-  BoxAlertStyled,
-  AlertStyled,
+  StyledBoxAlert,
+  StyledAlert,
 } from "@/App.styled";
-import FormLoginByGmail from "@/components/FormLoginByGmail/FormLoginByGmail";
-import FormLoginByNumberPhone from "@/components/FormLoginByNumberPhone/FormLoginByNumberPhone";
-import { Routes, Route } from "react-router-dom";
+
 import FormFillCode from "./components/FormFillCode/FormFillCode";
-import { DataForm } from "@/components/FormLoginByGmail/FormLoginByGmail";
-import { DataFormLog } from "@/components/FormLoginByNumberPhone/FormLoginByNumberPhone";
-import { IHandleSubmit } from "@/components/FormFillCode/FormFillCode";
+import FormLogin, { DataForm } from "@/components/FormLoginByGmail/FormLogin";
+import { ThemeProvider } from "@mui/material/styles";
+import customTheme from "@/themes/theme";
 
 function App() {
   const [dataLogin, setDataLogin] = useState<DataForm>();
-  const [otp, setOtp] = useState<IHandleSubmit>();
-  const [dataLoginNumberPhone, setDataLoginNumberPhone] =
-    useState<DataFormLog>();
+  const [isVerify, setIsVerify] = useState<boolean>();
   const [open, setOpent] = useState(true);
-  const [isIdLoginByEmail, setIdLoginByEmail] = useState<number>();
+  const [isLogin, setIsLogin] = useState<boolean>();
+  const [isLoginBySMS, setIsLoginBySMS] = useState<boolean>();
 
-  const OTP_PASS = "989999";
-  const onSetDalaLogin = (dataLogin: DataForm, id: number) => {
+  const onSetDalaLogin = (dataLogin: DataForm, isLoginBySMS: boolean) => {
     setDataLogin(dataLogin);
-    setIdLoginByEmail(id);
+    setIsLoginBySMS(isLoginBySMS);
   };
 
-  const onSetDalaLoginNumberPhone = (dataLogin: DataFormLog, id: number) => {
-    setDataLoginNumberPhone(dataLogin);
-    setIdLoginByEmail(id);
+  const onVerify = (value: boolean) => {
+    setIsVerify(value);
   };
 
-  const onSetOtp = (value: IHandleSubmit) => {
-    setOtp(value);
+  console.log(isVerify);
+  const onBack = () => {
+    setIsLogin(false);
   };
-
   return (
-    <BoxContainer>
-      <ImageLogo src="../images/background.png" />
-      {open && (
-        <BoxAlertStyled>
-          {otp?.otp === OTP_PASS ? (
-            <AlertStyled
-              icon={false}
-              onClose={() => {
-                setOpent(false);
-              }}
-            >
-              Code has been sent successfully
-            </AlertStyled>
-          ) : (
-            <></>
-          )}
-        </BoxAlertStyled>
-      )}
+    <ThemeProvider theme={customTheme}>
+      <BoxContainer>
+        <ImageLogo src="../images/background.png" />
+        {open && (
+          <StyledBoxAlert>
+            {isVerify ? (
+              <StyledAlert
+                icon={false}
+                onClose={() => {
+                  setOpent(false);
+                }}
+              >
+                Code has been sent successfully
+              </StyledAlert>
+            ) : (
+              <></>
+            )}
+          </StyledBoxAlert>
+        )}
 
-      <Routes>
-        <Route
-          path="/"
-          element={<FormLoginByGmail onSetDalaLogin={onSetDalaLogin} />}
-        />
-        <Route
-          path="/LoginByNumber"
-          element={
-            <FormLoginByNumberPhone
-              onSetDalaLoginNumberPhone={onSetDalaLoginNumberPhone}
-            />
-          }
-        />
-        <Route
-          path="/LoginFillCode"
-          element={
-            <FormFillCode
-              dataLogin={dataLogin}
-              dataLoginNumberPhone={dataLoginNumberPhone}
-              onSetOtp={onSetOtp}
-              isIdLoginByEmail={isIdLoginByEmail}
-            />
-          }
-        />
-      </Routes>
+        {isLogin ? (
+          <FormFillCode
+            dataLogin={dataLogin}
+            onVerify={onVerify}
+            onBack={onBack}
+            isLoginBySMS={isLoginBySMS}
+          />
+        ) : (
+          <FormLogin onSetDalaLogin={onSetDalaLogin} setIsLogin={setIsLogin} />
+        )}
 
-      <Typo>@2023 Ecoxplore. All Right Reserved.</Typo>
-    </BoxContainer>
+        <Typo>@2023 Ecoxplore. All Right Reserved.</Typo>
+      </BoxContainer>
+    </ThemeProvider>
   );
 }
 
