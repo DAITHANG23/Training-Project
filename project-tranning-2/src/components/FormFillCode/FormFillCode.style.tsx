@@ -1,4 +1,3 @@
-import theme from "@/themes/theme";
 import {
   Typography,
   styled,
@@ -9,22 +8,14 @@ import {
 } from "@mui/material";
 import { MuiOtpInput } from "mui-one-time-password-input";
 
-interface ContainerProps {
-  theme: typeof theme;
-}
 interface BtnProps {
-  styleactive: boolean | undefined;
-  theme?: typeof theme;
+  styleactive?: boolean;
 }
 interface InputProps {
-  theme?: typeof theme;
   styleError: boolean;
 }
 
-interface ButtonResendCodeProps {
-  theme?: typeof theme;
-}
-export const BoxFormFillCode = styled("form")(({ theme }: ContainerProps) => ({
+export const BoxFormFillCode = styled("form")(({ theme }) => ({
   width: "510px",
   textAlign: "center",
   border: "none",
@@ -33,11 +24,11 @@ export const BoxFormFillCode = styled("form")(({ theme }: ContainerProps) => ({
   margin: " 170px 300px 170px 260px",
 }));
 
-export const ImgLogo = styled("img")(({ theme }: ContainerProps) => ({
+export const ImgLogo = styled("img")(() => ({
   width: "43%",
 }));
 
-export const TitleTypo = styled(Typography)(({ theme }: ContainerProps) => ({
+export const TitleTypo = styled(Typography)(({ theme }) => ({
   fontSize: "24px",
   fontWeight: "400",
   paddingTop: theme.spacing(2),
@@ -58,8 +49,8 @@ export const StyledEmail = styled(Typography)(() => ({
   fontSize: "16px",
 }));
 
-export const StyledInput = styled(MuiOtpInput)(
-  ({ theme, styleError }: InputProps) => ({
+export const StyledInput = styled(MuiOtpInput)<InputProps>(
+  ({ theme, styleError }) => ({
     "& .MuiInputBase-root": {
       borderRadius: "1000px",
       width: "56px",
@@ -85,37 +76,35 @@ export const StyledInput = styled(MuiOtpInput)(
   })
 );
 
-export const StyledButton = styled(Button)(
-  ({ theme, styleactive }: BtnProps) => ({
+export const StyledButton = styled(Button)<BtnProps>(
+  ({ theme, styleactive }) => ({
     width: "100%",
-    color: styleactive ? `${theme?.palette.background.paper}` : "#94999C",
+    color: styleactive ? theme?.palette.background.paper : "#94999C",
     border: "none",
     borderRadius: "1000px",
     marginTop: theme?.spacing(3),
-    backgroundColor: styleactive ? `${theme?.palette.primary.main}` : "#F3F5F6",
+    backgroundColor: styleactive ? theme?.palette.primary.main : "#F3F5F6",
   })
 );
 
-export const BoxLinkStyled = styled(Box)(({ theme }: ContainerProps) => ({
+export const BoxLinkStyled = styled(Box)(({ theme }) => ({
   paddingTop: theme.spacing(3),
 }));
 
-export const StyledLink = styled("p")(({ theme }: ContainerProps) => ({
+export const StyledLink = styled("p")(({ theme }) => ({
   textDecoration: "none",
   cursor: "pointer",
   color: theme.palette.primary.main,
   fontSize: "16px",
 }));
 
-export const InputContainer = styled(FormControl)(
-  ({ theme }: ContainerProps) => ({
-    paddingTop: theme.spacing(3),
-    width: "100%",
-    display: "flex",
-    flexDirection: "row",
-    gap: "12px",
-  })
-);
+export const InputContainer = styled(FormControl)(({ theme }) => ({
+  paddingTop: theme.spacing(3),
+  width: "100%",
+  display: "flex",
+  flexDirection: "row",
+  gap: "12px",
+}));
 
 export const ContainerTitle = styled("div")(({ theme }) => ({
   paddingTop: theme.spacing(4),
@@ -132,17 +121,15 @@ export const TitleReceiveCode = styled("span")(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-export const ButtonResendCode = styled("button")(
-  ({ theme }: ButtonResendCodeProps) => ({
-    color: theme?.palette.primary.main,
-    border: "none",
-    background: theme?.palette.background.paper,
-    cursor: "pointer",
-    fontSize: "16px",
-    fontWeight: 400,
-    paddingTop: "3px",
-  })
-);
+export const ButtonResendCode = styled("button")(({ theme }) => ({
+  color: theme?.palette.primary.main,
+  border: "none",
+  background: theme?.palette.background.paper,
+  cursor: "pointer",
+  fontSize: "16px",
+  fontWeight: 400,
+  paddingTop: "3px",
+}));
 
 export const MinuteResentCode = styled("span")(({ theme }) => ({
   color: theme.palette.error.main,

@@ -27,7 +27,7 @@ export const CardIsComing = styled("div")(({ theme }) => ({
   opacity: "1 !important",
 }));
 
-export const Cards = styled("div")(({ theme }) => ({
+export const Cards = styled("div")(() => ({
   display: "flex",
   flexWrap: "wrap",
   gap: "50px",

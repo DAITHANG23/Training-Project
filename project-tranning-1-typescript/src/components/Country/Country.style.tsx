@@ -1,6 +1,5 @@
 import { styled, Typography } from "@mui/material";
 import DoneIcon from "@mui/icons-material/Done";
-import theme from "@/theme/theme";
 
 interface StyledImageProps {
   isComing: boolean;
@@ -9,7 +8,6 @@ interface StyledImageProps {
 interface CountryProps {
   status: boolean;
   isSelected: boolean;
-  theme?: typeof theme;
 }
 
 export const CardImage = styled("div")`
@@ -20,8 +18,8 @@ export const StyledImage = styled("img")(({ isComing }: StyledImageProps) => ({
   width: isComing ? "70%" : "100%",
 }));
 
-export const CountryContainer = styled("div")(
-  ({ status, isSelected, theme }: CountryProps) => ({
+export const CountryContainer = styled("div")<CountryProps>(
+  ({ status, isSelected, theme }) => ({
     height: "100%",
     width: "100%",
     textAlign: "center",

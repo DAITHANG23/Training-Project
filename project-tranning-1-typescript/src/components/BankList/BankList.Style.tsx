@@ -1,4 +1,3 @@
-import theme from "@/theme/theme";
 import {
   styled,
   TableCell,
@@ -8,27 +7,15 @@ import {
 } from "@mui/material";
 
 interface ActiveCardProps {
-  theme?: typeof theme;
-  styleActive: boolean | undefined;
-}
-
-interface InactiveCardProps {
-  theme?: typeof theme;
-  styleActive: boolean | undefined;
+  styleActive?: boolean;
 }
 
 interface TableCellNameProps {
-  theme?: typeof theme;
   styleactive: boolean;
 }
 
-interface TableCellIconProps {
-  theme?: typeof theme;
-  styleactive: boolean;
-}
-
-export const ActiveCard = styled("div")(
-  ({ theme, styleActive }: ActiveCardProps) => ({
+export const ActiveCard = styled("div")<ActiveCardProps>(
+  ({ theme, styleActive }) => ({
     width: "125px",
     textAlign: "center",
     border: "none",
@@ -40,8 +27,8 @@ export const ActiveCard = styled("div")(
   })
 );
 
-export const Inactive = styled("div")(
-  ({ theme, styleActive }: InactiveCardProps) => ({
+export const Inactive = styled("div")<ActiveCardProps>(
+  ({ theme, styleActive }) => ({
     width: "125px",
     textAlign: "center",
     border: "none",
@@ -53,8 +40,8 @@ export const Inactive = styled("div")(
   })
 );
 
-export const TableCellNameStyle = styled(TableCell)(
-  ({ theme, styleactive }: TableCellNameProps) => ({
+export const TableCellNameStyle = styled(TableCell)<TableCellNameProps>(
+  ({ theme, styleactive }) => ({
     borderTopLeftRadius: "16px",
     borderBottomLeftRadius: styleactive ? "0px" : "16px",
     borderBottom: `3px solid ${theme?.palette.background.default}`,
@@ -63,8 +50,8 @@ export const TableCellNameStyle = styled(TableCell)(
   })
 );
 
-export const TableCellIconStyle = styled(TableCell)(
-  ({ theme, styleactive }: TableCellIconProps) => ({
+export const TableCellIconStyle = styled(TableCell)<TableCellNameProps>(
+  ({ theme, styleactive }) => ({
     borderTopRightRadius: "16px",
     borderBottomRightRadius: styleactive ? "0px" : "16px",
     borderBottom: `3px solid ${theme?.palette.background.default}`,
@@ -88,11 +75,11 @@ export const TableCellActiveStyled = styled(TableCell)(({ theme }) => ({
   borderBottom: `3px solid ${theme.palette.background.default}`,
 }));
 
-export const TableRowContentStyled = styled(TableRow)(({ theme }) => ({
+export const TableRowContentStyled = styled(TableRow)(() => ({
   backgroundColor: "#FFF",
 }));
 
-export const BoxStyled = styled(Box)(({ theme }) => ({
+export const BoxStyled = styled(Box)(() => ({
   marginTop: "30px",
 }));
 
