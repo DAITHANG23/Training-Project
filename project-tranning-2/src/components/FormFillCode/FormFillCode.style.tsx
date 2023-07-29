@@ -8,13 +8,6 @@ import {
 } from "@mui/material";
 import { MuiOtpInput } from "mui-one-time-password-input";
 
-interface BtnProps {
-  styleactive?: boolean;
-}
-interface InputProps {
-  styleError: boolean;
-}
-
 export const BoxFormFillCode = styled("form")(({ theme }) => ({
   width: "510px",
   textAlign: "center",
@@ -49,7 +42,7 @@ export const StyledEmail = styled(Typography)(() => ({
   fontSize: "16px",
 }));
 
-export const StyledInput = styled(MuiOtpInput)<InputProps>(
+export const StyledInput = styled(MuiOtpInput)<{ styleError: boolean }>(
   ({ theme, styleError }) => ({
     "& .MuiInputBase-root": {
       borderRadius: "1000px",
@@ -76,7 +69,7 @@ export const StyledInput = styled(MuiOtpInput)<InputProps>(
   })
 );
 
-export const StyledButton = styled(Button)<BtnProps>(
+export const StyledButton = styled(Button)<{ styleactive: boolean }>(
   ({ theme, styleactive }) => ({
     width: "100%",
     color: styleactive ? theme?.palette.background.paper : "#94999C",
