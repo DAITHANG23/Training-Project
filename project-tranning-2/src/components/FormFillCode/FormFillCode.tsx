@@ -20,7 +20,7 @@ import {
   SecondResentCode,
 } from "@/components/FormFillCode/FormFillCode.style";
 
-import { DataForm } from "@/components/FormLoginByGmail/FormLogin";
+import { DataForm } from "@/components/FormLogin/FormLogin";
 import { Controller, useForm, SubmitHandler } from "react-hook-form";
 import { Box } from "@mui/material";
 

@@ -8,7 +8,7 @@ import {
 } from "@/App.styled";
 
 import FormFillCode from "./components/FormFillCode/FormFillCode";
-import FormLogin, { DataForm } from "@/components/FormLoginByGmail/FormLogin";
+import FormLogin, { DataForm } from "@/components/FormLogin/FormLogin";
 import { ThemeProvider } from "@mui/material/styles";
 import customTheme from "@/themes/theme";
 
