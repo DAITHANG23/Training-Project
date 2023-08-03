@@ -4,10 +4,13 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "@/themes/theme";
+import theme from "@/themes/themes";
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+if (process.env.NODE_ENV === "development") {
+  require("@/mocks/brower");
+}
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
