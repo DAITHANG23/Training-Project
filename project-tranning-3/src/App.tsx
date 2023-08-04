@@ -12,7 +12,7 @@ function App() {
       <SideBar setIsPage={setIsPage} />
       <StyledBodyContainer>
         <Header isPage={isPage} />
-        <TableListUser />
+        <TableListUser isPage={isPage} />
       </StyledBodyContainer>
     </StyledBoxContainer>
   );

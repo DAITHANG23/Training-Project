@@ -5,6 +5,7 @@ import {
   TableBody,
   TableHead,
   TableContainer,
+  TablePagination,
 } from "@mui/material";
 
 export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
@@ -63,3 +64,7 @@ export const StyledButtonEdit = styled("button")(({ theme }) => ({
   cursor: "pointer",
   backgroundColor: theme.palette.background.paper,
 }));
+
+export const StyledTablePagination = styled(TablePagination)(
+  ({ theme }) => ({})
+);

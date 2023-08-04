@@ -7,4 +7,5 @@ export const StyledBoxContainer = styled(Box)(() => ({
 export const StyledBodyContainer = styled(Box)(({ theme }) => ({
   width: "82%",
   backgroundColor: "#fbfcfc",
+  position: "relative",
 }));

@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import React, { useState } from "react";
+import { useState } from "react";
 import { PiMagnifyingGlassBold } from "react-icons/pi";
 import {
   StyleTableHeaderContainer,
@@ -7,23 +7,29 @@ import {
   StyledBoxButton,
   StyledInputSearch,
 } from "@/components/TableHeader/TableHeader.style";
-const TableHeader = () => {
-  const [status, setStatus] = useState<string>();
+
+interface TableHeaderProps {
+  onClickButtonStatus: (status: string) => void;
+}
+
+const TableHeader = ({ onClickButtonStatus }: TableHeaderProps) => {
+  const [status, setStatus] = useState<string>("Active");
   const onClickChooseStatus = (status: string) => {
     setStatus(status);
+    onClickButtonStatus(status);
   };
   return (
     <StyleTableHeaderContainer>
       <StyledBoxButton>
         <StyledButtonHeader
-          status={status === "active"}
-          onClick={() => onClickChooseStatus("active")}
+          status={status === "Active"}
+          onClick={() => onClickChooseStatus("Active")}
         >
           Active
         </StyledButtonHeader>
         <StyledButtonHeader
-          status={status === "suspended"}
-          onClick={() => onClickChooseStatus("suspended")}
+          status={status === "Suspended"}
+          onClick={() => onClickChooseStatus("Suspended")}
         >
           Suspended
         </StyledButtonHeader>
