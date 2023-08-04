@@ -18,6 +18,7 @@ export const StyledTableBody = styled(TableBody)(({ theme }) => ({
 }));
 
 export const StyledTableHead = styled(TableHead)(({ theme }) => ({
+  backgroundColor: theme.palette.background.default,
   border: "none",
   "& .css-1smula1-MuiTableCell-root": {
     border: "none",

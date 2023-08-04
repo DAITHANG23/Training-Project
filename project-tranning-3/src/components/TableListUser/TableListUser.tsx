@@ -1,4 +1,11 @@
-import { Table, TableRow, TableCell, Box } from "@mui/material";
+import { useState } from "react";
+import {
+  Table,
+  TableRow,
+  TableCell,
+  Box,
+  TablePagination,
+} from "@mui/material";
 import TableHeader from "@/components/TableHeader/TableHeader";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import {
@@ -13,6 +20,19 @@ import {
   StyledTableContainer,
 } from "@/components/TableListUser/TableListUser.styled";
 const TableListUser = () => {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+
+  const handleChangePage = (event: unknown, newPage: number) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setRowsPerPage(+event.target.value);
+    setPage(0);
+  };
   return (
     <div>
       <StyledTableContainer>
@@ -61,6 +81,27 @@ const TableListUser = () => {
             </TableRow>
           </StyledTableBody>
         </Table>
+        <TablePagination
+          rowsPerPageOptions={[10, 20, 30]}
+          component="div"
+          count={20}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowsPerPage}
+          labelRowsPerPage="Show"
+          labelDisplayedRows={({ from, to, count }) =>
+            `From ${from}-${to} of  ${count} items`
+          }
+          sx={{
+            backgroundColor: "#FFF",
+            display: "flex",
+            justifyContent: "space-between",
+            "& .css-levciy-MuiTablePagination-displayedRows": {
+              paddingLeft: "630px",
+            },
+          }}
+        />
       </StyledTableContainer>
     </div>
   );
