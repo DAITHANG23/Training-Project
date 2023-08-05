@@ -10,14 +10,22 @@ import {
 
 interface TableHeaderProps {
   onClickButtonStatus: (status: string) => void;
+  onSearch: (item: string) => void;
 }
 
-const TableHeader = ({ onClickButtonStatus }: TableHeaderProps) => {
+const TableHeader = ({ onClickButtonStatus, onSearch }: TableHeaderProps) => {
   const [status, setStatus] = useState<string>("Active");
+  const [search, setSearch] = useState("");
   const onClickChooseStatus = (status: string) => {
     setStatus(status);
     onClickButtonStatus(status);
   };
+
+  const onSearchHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(event.target.value);
+    onSearch(event.target.value);
+  };
+
   return (
     <StyleTableHeaderContainer>
       <StyledBoxButton>
@@ -45,7 +53,12 @@ const TableHeader = ({ onClickButtonStatus }: TableHeaderProps) => {
             height: "20px",
           }}
         />
-        <StyledInputSearch type="text" placeholder="Search" />
+        <StyledInputSearch
+          type="text"
+          placeholder="Search"
+          value={search}
+          onChange={onSearchHandler}
+        />
       </Box>
     </StyleTableHeaderContainer>
   );

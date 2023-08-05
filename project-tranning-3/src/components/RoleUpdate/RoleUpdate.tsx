@@ -1,21 +1,34 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Box,
-  Typography,
-  Button,
-  TableContainer,
   Table,
   TableHead,
   TableBody,
   TableCell,
   TableRow,
 } from "@mui/material";
+
 import IconButton from "@mui/material/IconButton";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+import { useForm } from "react-hook-form";
+import {
+  StyledTableCell,
+  StyledCollapse,
+  StyledTitle,
+  StyledTitleActive,
+  StyledSpan,
+  StyledButton,
+  StyledTableContainer,
+  StyledTableCellTitle,
+  StyledBoxHeader,
+  StyledBoxTitle,
+} from "./RoleUpdate.style";
+
 interface RoleUpdateProps {
   roleUpdated: string;
 }
+
 const RoleUpdate = ({ roleUpdated }: RoleUpdateProps) => {
   const [cardIDOpen, setCardIDOpen] = useState<string>();
   const [open, setOpen] = useState(false);
@@ -32,14 +45,72 @@ const RoleUpdate = ({ roleUpdated }: RoleUpdateProps) => {
     setCardIDOpen(id);
     setOpen(!open);
   };
+  const { register, handleSubmit } = useForm();
+
+  const onFormSubmitEditHandle = handleSubmit((data) => {
+    // setRoles(newRoleList);
+    console.log(data);
+  });
+
   const TableBodyContent = elements.map((el) => {
+    const elementsFeature = ["Add", "Edit", "View"];
+
+    const TableEdit = elementsFeature.map((elFeature) => {
+      return (
+        <TableRow
+          sx={{
+            "&:last-child td, &:last-child th": { border: 0 },
+            "& td, & th": {
+              borderBottom: "1px solid #E8ECEE",
+            },
+          }}
+        >
+          <TableCell sx={{ width: "616px" }}>
+            {elFeature} {el}
+          </TableCell>
+
+          <TableCell sx={{ width: "196px" }}>
+            <input
+              {...register(`${elFeature}-${el}`, {
+                required: true,
+              })}
+              value="Yes"
+              type="radio"
+              name={`${elFeature}-${el}`}
+            />
+          </TableCell>
+          <TableCell sx={{ width: "196px" }}>
+            <input
+              {...register(`${elFeature}-${el}`, {
+                required: true,
+              })}
+              value="No"
+              type="radio"
+              name={`${elFeature}-${el}`}
+            />
+          </TableCell>
+        </TableRow>
+      );
+    });
+
     return (
       <>
-        <TableRow onClick={() => onClick(el)} aria-label="expand row">
-          <TableCell>{el}</TableCell>
+        <TableRow
+          onClick={() => onClick(el)}
+          aria-label="expand row"
+          sx={{
+            "&:last-child td, &:last-child th": { border: 0 },
+            "& td, & th": {
+              borderBottom: "1px solid #E8ECEE",
+            },
+          }}
+        >
+          <StyledTableCell styleActive={cardIDOpen === el && open}>
+            {el}
+          </StyledTableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>
-          <TableCell>
+          <StyledTableCell styleActive={cardIDOpen === el && open}>
             <IconButton>
               {cardIDOpen === el && open ? (
                 <KeyboardArrowUpIcon />
@@ -47,94 +118,54 @@ const RoleUpdate = ({ roleUpdated }: RoleUpdateProps) => {
                 <KeyboardArrowDownIcon />
               )}
             </IconButton>
-          </TableCell>
+          </StyledTableCell>
         </TableRow>
-        <TableRow></TableRow>
+
+        <StyledCollapse
+          key={el}
+          in={cardIDOpen === el ? open : undefined}
+          timeout="auto"
+          unmountOnExit
+        >
+          <Table sx={{ borderRadius: "16px", backgroundColor: "#FFF" }}>
+            <TableBody>{TableEdit}</TableBody>
+          </Table>
+        </StyledCollapse>
       </>
     );
   });
 
   return (
     <Box>
-      <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-        <Box sx={{ display: "flex" }}>
-          <Typography
-            sx={{
-              backgroundColor: "#F3F5F6",
-              color: "#94999C",
-              border: "none",
-              borderRadius: "1000px",
-              padding: "2px 9px",
-              height: "28px",
-            }}
-          >
-            User management
-          </Typography>
-          <span style={{ color: "#94999C", fontSize: "16px" }}>/</span>
-          <Typography
-            sx={{
-              backgroundColor: "#F3F5F6",
-              color: "#94999C",
-              border: "none",
-              borderRadius: "1000px",
-              padding: "2px 9px",
-              fontSize: "14px",
-              height: "28px",
-            }}
-          >
-            Roles & Permission
-          </Typography>
-          <span style={{ color: "#94999C", fontSize: "16px" }}>/</span>
-          <Typography
-            sx={{
-              backgroundColor: "#F3F5F6",
-              color: "",
-              border: "none",
-              borderRadius: "1000px",
-              padding: "2px 9px",
-              height: "28px",
-            }}
-          >
-            {roleUpdated} role
-          </Typography>
-        </Box>
+      <form onSubmit={onFormSubmitEditHandle}>
+        <StyledBoxHeader>
+          <StyledBoxTitle sx={{ display: "flex" }}>
+            <StyledTitle>User management</StyledTitle>
+            <StyledSpan>/</StyledSpan>
+            <StyledTitle>Roles & Permission</StyledTitle>
+            <StyledSpan>/</StyledSpan>
+            <StyledTitleActive>{roleUpdated} role</StyledTitleActive>
+          </StyledBoxTitle>
 
-        <Button
-          sx={{
-            backgroundColor: "#530F66",
-            padding: "12px 20px",
-            color: "#FFF",
-            border: "none",
-            borderRadius: "1000px",
-            width: "70px",
-            height: "40px",
-          }}
-        >
-          SAVE
-        </Button>
-      </Box>
+          <StyledButton type="submit">SAVE</StyledButton>
+        </StyledBoxHeader>
 
-      <TableContainer
-        sx={{
-          backgroundColor: "#FFF",
-          marginTop: "38px",
-          borderRadius: "16px",
-        }}
-      >
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell sx={{ width: "624px" }}>
-                {roleUpdated.toUpperCase()} ROLE
-              </TableCell>
-              <TableCell sx={{ width: "200px" }}>Yes</TableCell>
-              <TableCell sx={{ width: "200px" }}>No</TableCell>
-              <TableCell></TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>{TableBodyContent}</TableBody>
-        </Table>
-      </TableContainer>
+        <StyledTableContainer>
+          <Table sx={{ border: "none" }} aria-label="collapsible table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCellTitle>
+                  {roleUpdated.toUpperCase()} ROLE
+                </StyledTableCellTitle>
+                <TableCell sx={{ width: "200px" }}>Yes</TableCell>
+                <TableCell sx={{ width: "200px" }}>No</TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>{TableBodyContent}</TableBody>
+          </Table>
+        </StyledTableContainer>
+      </form>
     </Box>
   );
 };

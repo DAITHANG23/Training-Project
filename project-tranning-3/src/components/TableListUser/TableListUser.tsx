@@ -30,9 +30,9 @@ const TableListUser = ({ isPage }: TableListUserProps) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [users, setUsers] = useState<Users[]>();
-  const [statusUser, setStatusUser] = useState<Users[]>();
+  const [statusUser, setStatusUser] = useState<Users[] | undefined>();
   const { data, error, isLoading } = useUsers();
-
+  const [search, setSearch] = useState("");
   useEffect(() => {
     if (data) {
       setUsers(data);
@@ -88,7 +88,9 @@ const TableListUser = ({ isPage }: TableListUserProps) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
+  const onSearch = (item: string) => {
+    setSearch(item);
+  };
   const onClickButtonStatus = (status: string) => {
     const listUsers = users?.filter((user) => {
       return user.status === status;
@@ -101,7 +103,10 @@ const TableListUser = ({ isPage }: TableListUserProps) => {
     <div>
       {isPage === 1 ? (
         <StyledTableContainer>
-          <TableHeader onClickButtonStatus={onClickButtonStatus} />
+          <TableHeader
+            onClickButtonStatus={onClickButtonStatus}
+            onSearch={onSearch}
+          />
           <Table>
             <StyledTableHead>
               <TableRow>

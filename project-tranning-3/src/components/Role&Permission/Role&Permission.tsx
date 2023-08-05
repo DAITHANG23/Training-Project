@@ -1,17 +1,6 @@
 import { useState } from "react";
-import { useForm, Controller } from "react-hook-form";
-import {
-  TableContainer,
-  Table,
-  TableRow,
-  TableCell,
-  TableBody,
-  Modal,
-  Box,
-  Button,
-  Typography,
-  FormControl,
-} from "@mui/material";
+import { useForm } from "react-hook-form";
+import { Table, TableCell, TableBody, Box, FormControl } from "@mui/material";
 import {
   StyledBoxContainer,
   StyledButton,
@@ -21,14 +10,23 @@ import {
   StyleEditIcon,
   StyledTableContainer,
   StyledTableCellDes,
+  StyledTableRowEdit,
+  StyledModal,
+  StyledModalHeaderContainer,
+  StyledBoxHeader,
+  StyledTitleModal,
+  StyledButtonClose,
+  StyledForm,
+  StyledInputName,
+  StyledInputDes,
+  StyledBoxButton,
+  StyledBtnCancle,
+  StyledBtnCreate,
+  StyledContentError,
 } from "@/components/Role&Permission/Role&Permission.style";
 import { v4 as uuidv4 } from "uuid";
 import RoleUpdate from "../RoleUpdate/RoleUpdate";
-interface IRoles {
-  role?: string;
-  describe?: string;
-  id?: string;
-}
+
 const RolePermission = () => {
   const [roles, setRoles] = useState([
     { role: "Administrator", describe: "Des...", id: "1" },
@@ -61,20 +59,17 @@ const RolePermission = () => {
   const listRolePermission = roles.map((roleItem) => {
     const { role, describe, id } = roleItem;
     return (
-      <TableRow
-        key={id}
-        sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-      >
+      <StyledTableRowEdit key={id}>
         <StyledTableCell>{role}</StyledTableCell>
         <StyledTableCellDes align="left">{describe}</StyledTableCellDes>
         <TableCell align="right">
           <StyleEditIcon onClick={() => onEditRoleHandler(id)} />
         </TableCell>
-      </TableRow>
+      </StyledTableRowEdit>
     );
   });
 
-  const { register, handleSubmit, formState } = useForm<IRoles>({
+  const { register, handleSubmit, formState } = useForm({
     defaultValues: {
       role: "",
       describe: "",
@@ -89,7 +84,7 @@ const RolePermission = () => {
     };
     const newRoleList = [...roles, newRole];
 
-    // setRoles(newRoleList);
+    setRoles(newRoleList);
   });
 
   return (
@@ -102,62 +97,21 @@ const RolePermission = () => {
             <StyledTitle>Roles</StyledTitle>
             <StyledButton onClick={handleOpen}>Create role</StyledButton>
           </StyleBoxHeader>
-          <Modal
+          <StyledModal
             open={open}
             onClose={handleClose}
             aria-labelledby="parent-modal-title"
             aria-describedby="parent-modal-description"
-            sx={{
-              position: "absolute",
-              top: "150px",
-              left: "410px",
-            }}
           >
-            <Box
-              sx={{
-                backgroundColor: "#FFF",
-                borderRadius: "16px",
-                width: "620px",
-                height: "410px",
-                border: "none",
-                padding: "26px 24px",
-                position: "relative",
-              }}
-            >
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography
-                  sx={{ fontSize: "20px", fontWeight: "700", color: "#530F66" }}
-                >
-                  Create role
-                </Typography>
-                <button
-                  style={{
-                    borderRadius: "1000px",
-                    width: "32px",
-                    height: "32px",
-                    cursor: "pointer",
-                    border: "none",
-                    color: "#55585B",
-                    fontSize: "16px",
-                  }}
-                  onClick={handleClose}
-                >
-                  x
-                </button>
-              </Box>
-              <form
-                style={{ width: "100%", paddingTop: "48px" }}
-                onSubmit={onFormSubmitRoleHandle}
-              >
+            <StyledModalHeaderContainer>
+              <StyledBoxHeader>
+                <StyledTitleModal>Create role</StyledTitleModal>
+                <StyledButtonClose onClick={handleClose}>x</StyledButtonClose>
+              </StyledBoxHeader>
+              <StyledForm onSubmit={onFormSubmitRoleHandle}>
                 <FormControl>
                   <label htmlFor="role">Name</label>
-                  <input
-                    style={{
-                      width: "572px",
-                      padding: "8px 16px",
-                      borderRadius: "1000px",
-                      marginTop: "3px",
-                    }}
+                  <StyledInputName
                     type="text"
                     id="role"
                     placeholder="Super Administrator"
@@ -168,16 +122,13 @@ const RolePermission = () => {
                       },
                     })}
                   />
+                  <StyledContentError>
+                    {errors.role?.message}
+                  </StyledContentError>
                   <Box sx={{ marginTop: "24px" }}>
-                    <input
+                    <StyledInputDes
                       type="text"
                       id="role"
-                      style={{
-                        width: "572px",
-                        height: "122px",
-                        borderRadius: "16px",
-                        padding: "12px",
-                      }}
                       placeholder="Des of role"
                       {...register("describe", {
                         required: {
@@ -186,56 +137,22 @@ const RolePermission = () => {
                         },
                       })}
                     />
-                    <Typography>{errors.role?.message}</Typography>
-                    <Typography>{errors.describe?.message}</Typography>
+
+                    <StyledContentError>
+                      {errors.describe?.message}
+                    </StyledContentError>
                   </Box>
 
-                  <Box
-                    sx={{
-                      position: "absolute",
-                      top: "230px",
-                      right: "0px",
-                      display: "flex",
-                      gap: "16px",
-                    }}
-                  >
-                    <Button
-                      sx={{
-                        width: "87px",
-                        height: "40",
-                        border: "1px solid #530F66",
-                        fontSize: "12px",
-                        fontWeight: "700",
-                        padding: "12px 20px",
-                        textAlign: "center",
-                        borderRadius: "1000px",
-                      }}
-                      onClick={handleClose}
-                    >
+                  <StyledBoxButton>
+                    <StyledBtnCancle onClick={handleClose}>
                       CANCEL
-                    </Button>
-                    <Button
-                      sx={{
-                        width: "87px",
-                        height: "40",
-                        border: "none",
-                        fontSize: "12px",
-                        fontWeight: "700",
-                        padding: "12px 20px",
-                        textAlign: "center",
-                        borderRadius: "1000px",
-                        backgroundColor: "#530F66",
-                        color: "#FFF",
-                      }}
-                      type="submit"
-                    >
-                      CREATE
-                    </Button>
-                  </Box>
+                    </StyledBtnCancle>
+                    <StyledBtnCreate type="submit">CREATE</StyledBtnCreate>
+                  </StyledBoxButton>
                 </FormControl>
-              </form>
-            </Box>
-          </Modal>
+              </StyledForm>
+            </StyledModalHeaderContainer>
+          </StyledModal>
           <StyledTableContainer>
             <Table>
               <TableBody>{listRolePermission}</TableBody>
