@@ -23,6 +23,9 @@ import {
   StyledTableCellTitle,
   StyledBoxHeader,
   StyledBoxTitle,
+  StyledTableCellRadio,
+  StyledTableUpdate,
+  StyledTableRowTitle,
 } from "./RoleUpdate.style";
 
 interface RoleUpdateProps {
@@ -57,14 +60,7 @@ const RoleUpdate = ({ roleUpdated }: RoleUpdateProps) => {
 
     const TableEdit = elementsFeature.map((elFeature) => {
       return (
-        <TableRow
-          sx={{
-            "&:last-child td, &:last-child th": { border: 0 },
-            "& td, & th": {
-              borderBottom: "1px solid #E8ECEE",
-            },
-          }}
-        >
+        <StyledTableRowTitle key={`${elFeature}-${el}`}>
           <TableCell sx={{ width: "616px" }}>
             {elFeature} {el}
           </TableCell>
@@ -89,28 +85,22 @@ const RoleUpdate = ({ roleUpdated }: RoleUpdateProps) => {
               name={`${elFeature}-${el}`}
             />
           </TableCell>
-        </TableRow>
+        </StyledTableRowTitle>
       );
     });
 
     return (
       <>
-        <TableRow
+        <StyledTableRowTitle
           onClick={() => onClick(el)}
           aria-label="expand row"
-          sx={{
-            "&:last-child td, &:last-child th": { border: 0 },
-            "& td, & th": {
-              borderBottom: "1px solid #E8ECEE",
-            },
-          }}
         >
-          <StyledTableCell styleActive={cardIDOpen === el && open}>
+          <StyledTableCell styleactive={cardIDOpen === el && open}>
             {el}
           </StyledTableCell>
           <TableCell></TableCell>
           <TableCell></TableCell>
-          <StyledTableCell styleActive={cardIDOpen === el && open}>
+          <StyledTableCell styleactive={cardIDOpen === el && open}>
             <IconButton>
               {cardIDOpen === el && open ? (
                 <KeyboardArrowUpIcon />
@@ -119,7 +109,7 @@ const RoleUpdate = ({ roleUpdated }: RoleUpdateProps) => {
               )}
             </IconButton>
           </StyledTableCell>
-        </TableRow>
+        </StyledTableRowTitle>
 
         <StyledCollapse
           key={el}
@@ -127,9 +117,9 @@ const RoleUpdate = ({ roleUpdated }: RoleUpdateProps) => {
           timeout="auto"
           unmountOnExit
         >
-          <Table sx={{ borderRadius: "16px", backgroundColor: "#FFF" }}>
+          <StyledTableUpdate>
             <TableBody>{TableEdit}</TableBody>
-          </Table>
+          </StyledTableUpdate>
         </StyledCollapse>
       </>
     );
@@ -139,7 +129,7 @@ const RoleUpdate = ({ roleUpdated }: RoleUpdateProps) => {
     <Box>
       <form onSubmit={onFormSubmitEditHandle}>
         <StyledBoxHeader>
-          <StyledBoxTitle sx={{ display: "flex" }}>
+          <StyledBoxTitle>
             <StyledTitle>User management</StyledTitle>
             <StyledSpan>/</StyledSpan>
             <StyledTitle>Roles & Permission</StyledTitle>
@@ -151,14 +141,14 @@ const RoleUpdate = ({ roleUpdated }: RoleUpdateProps) => {
         </StyledBoxHeader>
 
         <StyledTableContainer>
-          <Table sx={{ border: "none" }} aria-label="collapsible table">
+          <Table aria-label="collapsible table">
             <TableHead>
               <TableRow>
                 <StyledTableCellTitle>
                   {roleUpdated.toUpperCase()} ROLE
                 </StyledTableCellTitle>
-                <TableCell sx={{ width: "200px" }}>Yes</TableCell>
-                <TableCell sx={{ width: "200px" }}>No</TableCell>
+                <StyledTableCellRadio>Yes</StyledTableCellRadio>
+                <StyledTableCellRadio>No</StyledTableCellRadio>
                 <TableCell></TableCell>
               </TableRow>
             </TableHead>

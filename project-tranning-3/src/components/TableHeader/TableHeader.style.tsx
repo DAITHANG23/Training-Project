@@ -1,5 +1,5 @@
 import { styled, Box } from "@mui/material";
-
+import { PiMagnifyingGlassBold } from "react-icons/pi";
 export const StyleTableHeaderContainer = styled("div")(({ theme }) => ({
   display: "flex",
   backgroundColor: theme.palette.background.paper,
@@ -45,3 +45,14 @@ export const StyledInputSearch = styled("input")(({ theme }) => ({
   width: "216px",
   height: "32px",
 }));
+
+export const StyledIconGlassBold = styled(PiMagnifyingGlassBold)(
+  ({ theme }) => ({
+    position: "absolute",
+    top: "6px",
+    left: "16px",
+    color: "#C5CACD",
+    width: "20px",
+    height: "20px",
+  })
+);

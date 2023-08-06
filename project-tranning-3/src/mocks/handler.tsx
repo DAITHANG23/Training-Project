@@ -244,7 +244,7 @@ export const handlers = [
           },
           {
             id: 19,
-            name: "Jane Cooper",
+            name: "Dom Nguyen",
             image: "avatar(4).png",
             numberPhone: "(65)1234 5678",
             status: "Active",

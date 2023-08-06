@@ -6,17 +6,19 @@ import {
   Button,
   TableContainer,
   Box,
+  Table,
+  TableRow,
 } from "@mui/material";
 
 export const Styled = styled("div");
 
-export const StyledTableCell = styled(TableCell)<{ styleActive: boolean }>(
-  ({ theme, styleActive }) => ({
+export const StyledTableCell = styled(TableCell)<{ styleactive: boolean }>(
+  ({ theme, styleactive }) => ({
     fontSize: "14px",
     fontWeight: 700,
-    color: styleActive ? theme.palette.error.main : theme.palette.text.primary,
+    color: styleactive ? theme.palette.error.main : theme.palette.text.primary,
     "& .css-78trlr-MuiButtonBase-root-MuiIconButton-root": {
-      color: styleActive
+      color: styleactive
         ? theme.palette.error.main
         : theme.palette.text.primary,
     },
@@ -79,4 +81,18 @@ export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
   marginTop: "38px",
   borderRadius: "16px",
   border: "none",
+}));
+
+export const StyledTableCellRadio = styled(TableCell)(() => ({
+  width: "200px",
+}));
+export const StyledTableRowTitle = styled(TableRow)(({ theme }) => ({
+  "&:last-child td, &:last-child th": { border: 0 },
+  "& td, & th": {
+    borderBottom: `1px solid ${theme.palette.primary.contrastText}`,
+  },
+}));
+export const StyledTableUpdate = styled(Table)(({ theme }) => ({
+  borderRadius: "16px",
+  backgroundColor: theme.palette.background.paper,
 }));

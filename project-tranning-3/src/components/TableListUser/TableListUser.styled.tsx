@@ -7,12 +7,13 @@ import {
   TableContainer,
   TablePagination,
 } from "@mui/material";
-
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 export const StyledTableContainer = styled(TableContainer)(({ theme }) => ({
   width: "93%",
   margin: "32px 40px",
   border: "none",
   borderRadius: "16px",
+  "&:last-child td, &:last-child th": { border: 0 },
 }));
 export const StyledTableBody = styled(TableBody)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
@@ -31,6 +32,21 @@ export const StyledTitleRow = styled(TableCell)(({ theme }) => ({
   color: theme.palette.text.primary,
   border: "none",
   width: "181px",
+}));
+export const StyledTitleRowName = styled(TableCell)(({ theme }) => ({
+  fontSize: "14px",
+  fontWeight: 400,
+  color: theme.palette.text.primary,
+  border: "none",
+  width: "300px",
+}));
+export const StyledTitleRowStatus = styled(TableCell)(({ theme }) => ({
+  fontSize: "14px",
+  fontWeight: 400,
+  color: theme.palette.text.primary,
+  border: "none",
+  width: "300px",
+  textAlign: "center",
 }));
 
 export const StyledTableRowContent = styled(Typography)(() => ({
@@ -65,6 +81,17 @@ export const StyledButtonEdit = styled("button")(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
 }));
 
-export const StyledTablePagination = styled(TablePagination)(
-  ({ theme }) => ({})
-);
+export const StyledTablePagination = styled(TablePagination)(({ theme }) => ({
+  backgroundColor: "#FFF",
+  display: "flex",
+  justifyContent: "space-between",
+  "& .css-levciy-MuiTablePagination-displayedRows": {
+    paddingLeft: "630px",
+  },
+}));
+export const StyledTableCellStatus = styled(TableCell)(() => ({
+  paddingLeft: "100px !important",
+}));
+export const StyleIcon = styled(MoreVertIcon)(({ theme }) => ({
+  color: theme.palette.primary.light,
+}));

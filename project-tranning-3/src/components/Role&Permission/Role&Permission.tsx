@@ -25,7 +25,7 @@ import {
   StyledContentError,
 } from "@/components/Role&Permission/Role&Permission.style";
 import { v4 as uuidv4 } from "uuid";
-import RoleUpdate from "../RoleUpdate/RoleUpdate";
+import RoleUpdate from "@/components/RoleUpdate/RoleUpdate";
 
 const RolePermission = () => {
   const [roles, setRoles] = useState([

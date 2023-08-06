@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
-import {
-  Table,
-  TableRow,
-  TableCell,
-  Box,
-  TablePagination,
-} from "@mui/material";
+import { Table, TableRow, TableCell, Box } from "@mui/material";
 import TableHeader from "@/components/TableHeader/TableHeader";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+
 import {
   StyledTitleRow,
   StyledTableCellName,
@@ -18,6 +12,11 @@ import {
   StyledTableBody,
   StyledTableHead,
   StyledTableContainer,
+  StyleIcon,
+  StyledTableCellStatus,
+  StyledTitleRowName,
+  StyledTitleRowStatus,
+  StyledTablePagination,
 } from "@/components/TableListUser/TableListUser.styled";
 import { useUsers } from "@/hooks/useFetch";
 import { Users } from "@/hooks/useFetch";
@@ -33,6 +32,23 @@ const TableListUser = ({ isPage }: TableListUserProps) => {
   const [statusUser, setStatusUser] = useState<Users[] | undefined>();
   const { data, error, isLoading } = useUsers();
   const [search, setSearch] = useState("");
+  console.log(search);
+
+  useEffect(() => {
+    const userItem = statusUser?.filter((user) => {
+      if (user.name.toLowerCase().includes(search.toLowerCase())) return true;
+    });
+
+    setStatusUser(userItem);
+  }, [search]);
+
+  useEffect(() => {
+    const listUsersActive = users?.filter((user) => {
+      return user.status === "Active";
+    });
+    setStatusUser(listUsersActive);
+  }, [users]);
+
   useEffect(() => {
     if (data) {
       setUsers(data);
@@ -63,16 +79,16 @@ const TableListUser = ({ isPage }: TableListUserProps) => {
           </StyledTableCellName>
           <TableCell>{role}</TableCell>
           <TableCell>{team}</TableCell>
-          <TableCell sx={{ paddingLeft: "50px" }}>
+          <StyledTableCellStatus>
             <StyledTitleStatus>{status}</StyledTitleStatus>
-          </TableCell>
+          </StyledTableCellStatus>
           <TableCell>
             <StyledTableRowContent>{lastActive.date}</StyledTableRowContent>
             <StyledTableRowContent>{lastActive.time}</StyledTableRowContent>
           </TableCell>
           <TableCell>
             <StyledButtonEdit>
-              <MoreVertIcon sx={{ color: "#94999C" }} />
+              <StyleIcon />
             </StyledButtonEdit>
           </TableCell>
         </TableRow>
@@ -88,9 +104,11 @@ const TableListUser = ({ isPage }: TableListUserProps) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
+
   const onSearch = (item: string) => {
     setSearch(item);
   };
+
   const onClickButtonStatus = (status: string) => {
     const listUsers = users?.filter((user) => {
       return user.status === status;
@@ -110,21 +128,18 @@ const TableListUser = ({ isPage }: TableListUserProps) => {
           <Table>
             <StyledTableHead>
               <TableRow>
-                <StyledTitleRow sx={{ width: "300px" }}>Name</StyledTitleRow>
+                <StyledTitleRowName>Name</StyledTitleRowName>
                 <StyledTitleRow>Role</StyledTitleRow>
                 <StyledTitleRow>Team</StyledTitleRow>
-                <StyledTitleRow sx={{ textAlign: "center" }}>
-                  Status
-                </StyledTitleRow>
+                <StyledTitleRowStatus>Status</StyledTitleRowStatus>
                 <StyledTitleRow>Last active</StyledTitleRow>
                 <StyledTitleRow sx={{ width: "32px" }}></StyledTitleRow>
               </TableRow>
             </StyledTableHead>
             <StyledTableBody>{TableListUsers}</StyledTableBody>
           </Table>
-          <TablePagination
+          <StyledTablePagination
             rowsPerPageOptions={[5, 10, 20, 30]}
-            component="div"
             count={20}
             rowsPerPage={rowsPerPage}
             page={page}
@@ -134,14 +149,6 @@ const TableListUser = ({ isPage }: TableListUserProps) => {
             labelDisplayedRows={({ from, to, count }) =>
               `From ${from}-${to} of  ${count} items`
             }
-            sx={{
-              backgroundColor: "#FFF",
-              display: "flex",
-              justifyContent: "space-between",
-              "& .css-levciy-MuiTablePagination-displayedRows": {
-                paddingLeft: "630px",
-              },
-            }}
           />
         </StyledTableContainer>
       ) : (

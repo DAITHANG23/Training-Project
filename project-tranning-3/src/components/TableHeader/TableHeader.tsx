@@ -1,11 +1,11 @@
 import { Box } from "@mui/material";
 import { useState } from "react";
-import { PiMagnifyingGlassBold } from "react-icons/pi";
 import {
   StyleTableHeaderContainer,
   StyledButtonHeader,
   StyledBoxButton,
   StyledInputSearch,
+  StyledIconGlassBold,
 } from "@/components/TableHeader/TableHeader.style";
 
 interface TableHeaderProps {
@@ -43,16 +43,7 @@ const TableHeader = ({ onClickButtonStatus, onSearch }: TableHeaderProps) => {
         </StyledButtonHeader>
       </StyledBoxButton>
       <Box sx={{ position: "relative" }}>
-        <PiMagnifyingGlassBold
-          style={{
-            position: "absolute",
-            top: "6px",
-            left: "16px",
-            color: "#C5CACD",
-            width: "20px",
-            height: "20px",
-          }}
-        />
+        <StyledIconGlassBold />
         <StyledInputSearch
           type="text"
           placeholder="Search"
